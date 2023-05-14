@@ -1,0 +1,16 @@
+[
+{
+  "modid": "parcaea",
+  "name": "Parcaea",
+  "description": "A mod that add features to parkour",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["XcusanaIi"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

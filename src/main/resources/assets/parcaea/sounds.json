@@ -1,0 +1,9 @@
+{
+  "s1": {"sounds": [{"name": "s1", "stream": true}]},
+  "s2": {"sounds": [{"name": "s2", "stream": true}]},
+  "s3": {"sounds": [{"name": "s3", "stream": true}]},
+  "s4": {"sounds": [{"name": "s4", "stream": true}]},
+  "s5": {"sounds": [{"name": "s5", "stream": true}]},
+  "s6": {"sounds": [{"name": "s6", "stream": true}]},
+  "s7": {"sounds": [{"name": "s7", "stream": true}]}
+}
