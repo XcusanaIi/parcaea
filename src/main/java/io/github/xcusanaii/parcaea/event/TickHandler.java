@@ -1,6 +1,7 @@
 package io.github.xcusanaii.parcaea.event;
 
 import io.github.xcusanaii.parcaea.Parcaea;
+import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
 import io.github.xcusanaii.parcaea.model.input.InputStat;
 import io.github.xcusanaii.parcaea.render.gui.GuiMenu;
 import io.github.xcusanaii.parcaea.util.KeyMouse;
@@ -27,18 +28,21 @@ public class TickHandler {
 
     @SubscribeEvent
     public void onClientTick(ClientTickEvent event) {
-        if (event.phase == TickEvent.Phase.END || mc.thePlayer == null) {
+        if (mc.thePlayer == null || !CfgGeneral.enableMod) return;
+        if (event.phase == TickEvent.Phase.END) {
             advancedInputHandler.onClientTickPost();
             noteHandler.onClientTickPost();
             infoHandler.onClientTickPost();
             syncKeyInputStatOnClientTickPost();
-            return;
+        }else {
+            syncKeyInputStatOnClientTickPre();
+            advancedInputHandler.onClientTickPre();
+            noteHandler.onClientTickPre();
+            commandMacroHandler.onClientTickPre();
+            if (Parcaea.keyMenu.isPressed()) {
+                mc.displayGuiScreen(new GuiMenu());
+            }
         }
-        syncKeyInputStatOnClientTickPre();
-        advancedInputHandler.onClientTickPre();
-        if (Parcaea.keyMenu.isPressed()) mc.displayGuiScreen(new GuiMenu());
-        noteHandler.onClientTickPre();
-        commandMacroHandler.onClientTickPre();
     }
 
     public static void setNoteHandler(NoteHandler noteHandler) {

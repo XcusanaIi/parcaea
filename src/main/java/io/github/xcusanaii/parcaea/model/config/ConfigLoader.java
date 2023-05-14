@@ -7,6 +7,7 @@ public class ConfigLoader {
     public static void loadConfig() {
         Configuration config = Parcaea.config;
 
+        CfgGeneral.enableMod = config.get("general", "enableMod", true).getBoolean();
         CfgGeneral.enableParcaea = config.get("general", "enableParcaea", true).getBoolean();
         CfgGeneral.enableSnake = config.get("general", "enableSnake", true).getBoolean();
         CfgGeneral.enable45S = config.get("general", "enable45S", true).getBoolean();
@@ -35,6 +36,7 @@ public class ConfigLoader {
     public static void saveConfig() {
         Configuration config = Parcaea.config;
 
+        config.get("general", "enableMod", true).set(CfgGeneral.enableMod);
         config.get("general", "enableParcaea", true).set(CfgGeneral.enableParcaea);
         config.get("general", "enableSnake", true).set(CfgGeneral.enableSnake);
         config.get("general", "enable45S", true).set(CfgGeneral.enable45S);

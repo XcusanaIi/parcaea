@@ -1,6 +1,7 @@
 package io.github.xcusanaii.parcaea.model.config;
 
 public class CfgGeneral {
+    public static boolean enableMod = true;
     public static boolean enableParcaea = true;
     public static boolean enableSnake = false;
     public static boolean enable45S = false;

@@ -1,6 +1,7 @@
 package io.github.xcusanaii.parcaea;
 
 import io.github.xcusanaii.parcaea.command.PCMCommand;
+import io.github.xcusanaii.parcaea.command.ToggleParcaeaCommand;
 import io.github.xcusanaii.parcaea.event.ClientQuitHandler;
 import io.github.xcusanaii.parcaea.event.RenderHandler;
 import io.github.xcusanaii.parcaea.event.TickHandler;
@@ -86,6 +87,7 @@ public class Parcaea {
         MinecraftForge.EVENT_BUS.register(new RenderHandler());
         MinecraftForge.EVENT_BUS.register(new ClientQuitHandler());
         ClientCommandHandler.instance.registerCommand(new PCMCommand());
+        ClientCommandHandler.instance.registerCommand(new ToggleParcaeaCommand());
     }
 
     private static void syncPKKeyBinds() {
