@@ -212,11 +212,28 @@ public class BasicHud extends AbsHud {
     @Override
     public void drawMouseNote(float partialTicks) {
         drawLastUnstableMouseNote(partialTicks);
-        for (MouseNoteDisplay mouseNote : mouseNoteDisplays) {
-            int y = (int) (mouseNote.y + Parcaea.PX_PER_TICK * partialTicks * CfgGeneral.noteSpeed);
-            if (y < leftTop.y || y > jLineCenter.y) continue;
+        for (int i = 0; i < mouseNoteDisplays.size(); i++) {
+            MouseNoteDisplay mouseNote = mouseNoteDisplays.get(i);
+            double y = mouseNote.y + Parcaea.PX_PER_TICK * partialTicks * CfgGeneral.noteSpeed;
+            if (y < leftTop.y || y > jLineCenter.y + Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed) continue;
+            Vec2i notePos = new Vec2i((int) (mouseTrackLeft + mouseTrackWidth * mouseNote.posPercent), (int) y);
+            if (i + 1 < mouseNoteDisplays.size() && mouseNoteDisplays.get(i + 1).posPercent != mouseNote.posPercent) {
+                MouseNoteDisplay mouseNoteNext = mouseNoteDisplays.get(i + 1);
+                if (y > jLineCenter.y) {
+                    y = jLineCenter.y;
+                    double posPercent = mouseNote.posPercent + (mouseNoteNext.posPercent - mouseNote.posPercent) * partialTicks;
+                    notePos = new Vec2i((int) (mouseTrackLeft + mouseTrackWidth * posPercent), (int) y);
+                }
+                double yNext = mouseNoteNext.y + Parcaea.PX_PER_TICK * partialTicks * CfgGeneral.noteSpeed;
+                Vec2i notePosNext = new Vec2i((int) (mouseTrackLeft + mouseTrackWidth * mouseNoteNext.posPercent), (int) yNext);
+                drawStyledLine(notePos, notePosNext, (int) (mouseNoteSize * 0.8), ColorGeneral.YELLOW_ALPHA);
+                drawStyledLine(notePos, notePosNext, CfgBasic.basicNoteBorderSize, ColorGeneral.ALL_PERFECT_BORDER);
+            }
+            if (y > jLineCenter.y) {
+                notePos.y = jLineCenter.y;
+            }
             drawStyleNoteWithBorder(
-                    new Vec2i((int) (mouseTrackLeft + mouseTrackWidth * mouseNote.posPercent), y),
+                    notePos,
                     (mouseNote.color == ColorGeneral.BLUE ? indicatorSize : mouseNoteSize) / 2,
                     (mouseNote.color == ColorGeneral.BLUE ? indicatorSize : mouseNoteSize) / 2,
                     mouseNote.color,

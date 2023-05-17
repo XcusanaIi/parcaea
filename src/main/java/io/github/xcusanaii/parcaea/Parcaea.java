@@ -1,7 +1,6 @@
 package io.github.xcusanaii.parcaea;
 
-import io.github.xcusanaii.parcaea.command.PCMCommand;
-import io.github.xcusanaii.parcaea.command.ToggleParcaeaCommand;
+import io.github.xcusanaii.parcaea.command.PPKCommand;
 import io.github.xcusanaii.parcaea.event.ClientQuitHandler;
 import io.github.xcusanaii.parcaea.event.RenderHandler;
 import io.github.xcusanaii.parcaea.event.TickHandler;
@@ -20,6 +19,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.lwjgl.input.Keyboard;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -86,8 +86,7 @@ public class Parcaea {
         MinecraftForge.EVENT_BUS.register(new TickHandler());
         MinecraftForge.EVENT_BUS.register(new RenderHandler());
         MinecraftForge.EVENT_BUS.register(new ClientQuitHandler());
-        ClientCommandHandler.instance.registerCommand(new PCMCommand());
-        ClientCommandHandler.instance.registerCommand(new ToggleParcaeaCommand());
+        ClientCommandHandler.instance.registerCommand(new PPKCommand());
     }
 
     private static void syncPKKeyBinds() {

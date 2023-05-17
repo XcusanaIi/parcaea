@@ -2,6 +2,7 @@ package io.github.xcusanaii.parcaea.render.gui;
 
 import io.github.xcusanaii.parcaea.Parcaea;
 import io.github.xcusanaii.parcaea.event.NoteHandler;
+import io.github.xcusanaii.parcaea.event.RecordHandler;
 import io.github.xcusanaii.parcaea.io.JumpLoader;
 import io.github.xcusanaii.parcaea.model.Chart;
 import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
@@ -166,6 +167,7 @@ public class GuiMenu extends GuiScreen {
                     Chart.selectedChart = chart;
                     CfgGeneral.enable45S = false;
                     mc.displayGuiScreen(null);
+                    RecordHandler.isInRecord = false;
                     return;
                 }
             }

@@ -22,6 +22,7 @@ public class RenderHandler {
 
     @SubscribeEvent
     public void onRenderTickPost(RenderGameOverlayEvent.Post event) {
+        if (!CfgGeneral.enableMod) return;
         syncMouseInputStat();
         if (event.type != RenderGameOverlayEvent.ElementType.EXPERIENCE || mc.currentScreen instanceof GuiMenu || mc.currentScreen instanceof GuiHudMenu || mc.currentScreen instanceof GuiPKControls) return;
         AdvancedInputHandler.onRenderTickPost();

@@ -75,10 +75,12 @@ public class BasicNoteHandler extends NoteHandler {
         List<MouseNote> mouseTicks = Chart.selectedChart.mouseTicks;
         for (int i = 0; i < mouseTicks.size(); i++) {
             MouseNote mouseNote = mouseTicks.get(i);
-            BasicHud.mouseNoteDisplays.add(new BasicHud.MouseNoteDisplay(
-                    mouseNote.posPercent,
-                    mouseNote.is45 ? ColorGeneral.BLUE : ColorGeneral.YELLOW, BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * i
-            ));
+            if (!mouseNote.canIgnoreDisplay) {
+                BasicHud.mouseNoteDisplays.add(new BasicHud.MouseNoteDisplay(
+                        mouseNote.posPercent,
+                        mouseNote.is45 ? ColorGeneral.BLUE : ColorGeneral.YELLOW, BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * i
+                ));
+            }
         }
 
         if (lastUnstableMouseIndex >= 0 && lastUnstableMouseIndex < mouseTicks.size()) {

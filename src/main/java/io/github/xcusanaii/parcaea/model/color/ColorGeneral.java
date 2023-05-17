@@ -1,6 +1,7 @@
 package io.github.xcusanaii.parcaea.model.color;
 
 public class ColorGeneral {
+    public static int YELLOW_ALPHA = 0xBBF2EEA2;
     public static int BLUE_ALPHA = 0xBB9CCDFC;
     public static int PINK_ALPHA = 0xBBFD84A1;
     public static int BLUE = 0xFF9CCDFC;

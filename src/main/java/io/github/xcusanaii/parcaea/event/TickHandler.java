@@ -18,6 +18,7 @@ public class TickHandler {
     public static InfoHandler infoHandler = new InfoHandler();
     public static AdvancedInputHandler advancedInputHandler = new AdvancedInputHandler();
     public static CommandMacroHandler commandMacroHandler = new CommandMacroHandler();
+    public static RecordHandler recordHandler = new RecordHandler();
 
     public static boolean advInputKeyBindJumpPressed = false;
     public static boolean advInputKeyBindForwardPressed = false;
@@ -26,21 +27,39 @@ public class TickHandler {
     public static boolean advInputKeyBindBackPressed = false;
     public static boolean advInputKeyBindSprintPressed = false;
 
+    private static boolean autoRightClicked = false;
+
     @SubscribeEvent
     public void onClientTick(ClientTickEvent event) {
         if (mc.thePlayer == null || !CfgGeneral.enableMod) return;
         if (event.phase == TickEvent.Phase.END) {
             advancedInputHandler.onClientTickPost();
-            noteHandler.onClientTickPost();
+            if (RecordHandler.isInRecord) {
+                recordHandler.onClientTickPost();
+            }else {
+                noteHandler.onClientTickPost();
+            }
+            if (autoRightClicked) {
+                KeyBinding.setKeyBindState(mc.gameSettings.keyBindUseItem.getKeyCode(), false);
+                autoRightClicked = false;
+            }
             infoHandler.onClientTickPost();
             syncKeyInputStatOnClientTickPost();
         }else {
             syncKeyInputStatOnClientTickPre();
             advancedInputHandler.onClientTickPre();
-            noteHandler.onClientTickPre();
+            if (RecordHandler.isInRecord) {
+                recordHandler.onClientTickPre();
+            }else {
+                noteHandler.onClientTickPre();
+            }
             commandMacroHandler.onClientTickPre();
             if (Parcaea.keyMenu.isPressed()) {
                 mc.displayGuiScreen(new GuiMenu());
+            }
+            if (Parcaea.keyRestartChart.isKeyDown() && CfgGeneral.enableAutoPos && mc.currentScreen == null && !autoRightClicked) {
+                autoRightClicked = true;
+                KeyBinding.setKeyBindState(mc.gameSettings.keyBindUseItem.getKeyCode(), true);
             }
         }
     }

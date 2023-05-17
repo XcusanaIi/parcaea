@@ -42,11 +42,15 @@ public class JumpLoader {
                             }
                         }
                         ArrayList<Number> tick = new ArrayList<Number>();
-                        while (scanner.hasNext()){
+                        for (int i = 0; i < 7 && scanner.hasNext(); i++) {
                             String str = scanner.next();
                             if(str.matches("^[+-]?\\d+$")) {
                                 tick.add(Integer.parseInt(str));
-                            }else if(str.matches("^-?\\d+(\\.\\d+)?$")) {
+                            }
+                        }
+                        if (scanner.hasNext()){
+                            String str = scanner.next();
+                            if(str.matches("^-?\\d+(\\.\\d+)?$")) {
                                 tick.add(Double.parseDouble(str));
                             }
                         }

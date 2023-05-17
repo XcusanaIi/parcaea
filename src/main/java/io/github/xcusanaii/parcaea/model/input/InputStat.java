@@ -1,5 +1,7 @@
 package io.github.xcusanaii.parcaea.model.input;
 
+import org.apache.commons.lang3.SerializationUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,10 @@ public class InputStat {
     public static InputTick isKeyFired = new InputTick();
     public static double mousePosPercent = 0.5;
     public static double yawRange = 180.0;
+
+    public static void addLastInput() {
+        InputStat.lastInput.add(SerializationUtils.clone(InputStat.isKeyDown));
+    }
 
     public static boolean isAnyKeyDown() {
         for (int i = 0; i < 7; i++) {

@@ -9,8 +9,6 @@ import io.github.xcusanaii.parcaea.model.note.KeyNote;
 import io.github.xcusanaii.parcaea.model.note.KeyNoteHead;
 import io.github.xcusanaii.parcaea.model.note.MouseNote;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.KeyBinding;
-import org.apache.commons.lang3.SerializationUtils;
 import java.util.List;
 
 public abstract class NoteHandler {
@@ -22,16 +20,12 @@ public abstract class NoteHandler {
     public static boolean lockLastInput = false;
     public static boolean isMissed = false;
     public static Rating rating = Rating.ALL_PERFECT;
-    private static boolean autoRightClicked = false;
+
     private static final Minecraft mc = Minecraft.getMinecraft();
 
     public void onClientTickPre() {
         if (!CfgGeneral.enableParcaea) return;
         if (Parcaea.keyRestartChart.isPressed()) {
-            if (CfgGeneral.enableAutoPos && mc.currentScreen == null) {
-                autoRightClicked = true;
-                KeyBinding.setKeyBindState(mc.gameSettings.keyBindUseItem.getKeyCode(), true);
-            }
             if (CfgGeneral.enable45S) {
                 init45S();
             }else if (Chart.selectedChart != null){
@@ -90,7 +84,7 @@ public abstract class NoteHandler {
         List<List<KeyNote>> keyTicks = Chart.selectedChart.keyTicks;
         List<MouseNote> mouseTicks = Chart.selectedChart.mouseTicks;
         if (tickI < 0 || tickI >= keyTicks.size()) return;
-        if (CfgGeneral.enableLastInput && !lockLastInput) addLastInput();
+        if (CfgGeneral.enableLastInput && !lockLastInput) InputStat.addLastInput();
         for (int i = 0; i < 7; i++) {
             if (keyTicks.get(tickI).get(i) instanceof KeyNoteHead) {
                 SoundHandler.playSoundEffect(i);
@@ -113,15 +107,8 @@ public abstract class NoteHandler {
         }
     }
 
-    private void addLastInput() {
-        InputStat.lastInput.add(SerializationUtils.clone(InputStat.isKeyDown));
-    }
-
     public void onClientTickPost() {
-        if (autoRightClicked) {
-            KeyBinding.setKeyBindState(mc.gameSettings.keyBindUseItem.getKeyCode(), false);
-            autoRightClicked = false;
-        }
+
     }
 
     private static void miss() {

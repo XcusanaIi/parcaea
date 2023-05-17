@@ -48,6 +48,29 @@ public abstract class AbsHud extends GuiIngame {
     public abstract void drawMouseNote(float partialTicks);
     public abstract void setNoteHandler();
 
+    public void drawStyledLine(Vec2i v1, Vec2i v2, int width, int color) {
+        int x1 = v1.x;
+        int x2 = v2.x;
+        int y1 = v1.y;
+        int y2 = v2.y;
+        double mX = (x1 + x2) / 2.0;
+        double mY = (y1 + y2) / 2.0;
+        double k = (double) (y2 - y1) / (double) (x2 - x1);
+        double theta = Math.atan(k);
+        double length = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+        double sinTheta = Math.sin(theta);
+        double cosTheta = Math.cos(theta);
+        Vec2i a1 = new Vec2i((int)(mX - cosTheta * length / 2.0 - sinTheta * (double) width / 2.0),
+                (int)(mY - sinTheta * length / 2.0 + cosTheta * (double) width / 2.0));
+        Vec2i a2 = new Vec2i((int)(mX + cosTheta * length / 2.0 - sinTheta * (double) width / 2.0),
+                (int)(mY + sinTheta * length / 2.0 + cosTheta * (double) width / 2.0));
+        Vec2i a3 = new Vec2i((int)(mX + cosTheta * length / 2.0 + sinTheta * (double) width / 2.0),
+                (int)(mY + sinTheta * length / 2.0 - cosTheta * (double) width / 2.0));
+        Vec2i a4 = new Vec2i((int)(mX - cosTheta * length / 2.0 + sinTheta * (double) width / 2.0),
+                (int)(mY - sinTheta * length / 2.0 - cosTheta * (double) width / 2.0));
+        drawPolygon(new Vec2i[]{a1, a2, a3, a4}, color);
+    }
+
     public void drawRectWithBorder(Vec2i center, int halfX, int halfY, int rectColor, int borderSize, int borderColor) {
         halfX = abs(halfX);
         halfY = abs(halfY);
@@ -70,6 +93,26 @@ public abstract class AbsHud extends GuiIngame {
     }
 
     private void drawOrzmicStyleHexagon(Vec2i center, int halfX, int halfY, int color) {
+        Vec2i[] vs = new Vec2i[6];
+        if (halfX > halfY) {
+            vs[0] = new Vec2i(center.x - halfX, center.y);
+            vs[1] = new Vec2i(center.x - halfX + halfY, center.y + halfY);
+            vs[2] = new Vec2i(center.x + halfX - halfY, center.y + halfY);
+            vs[3] = new Vec2i(center.x + halfX, center.y);
+            vs[4] = new Vec2i(center.x + halfX - halfY, center.y - halfY);
+            vs[5] = new Vec2i(center.x - halfX + halfY, center.y - halfY);
+        }else {
+            vs[0] = new Vec2i(center.x, center.y + halfY);
+            vs[1] = new Vec2i(center.x + halfX, center.y + halfY - halfX);
+            vs[2] = new Vec2i(center.x + halfX, center.y - halfY + halfX);
+            vs[3] = new Vec2i(center.x, center.y - halfY);
+            vs[4] = new Vec2i(center.x - halfX, center.y - halfY + halfX);
+            vs[5] = new Vec2i(center.x - halfX, center.y + halfY - halfX);
+        }
+        drawPolygon(vs, color);
+    }
+
+    private void drawPolygon(Vec2i[] vs, int color) {
         float r = (float)(color >> 16 & 255) / 255.0f;
         float g = (float)(color >> 8 & 255) / 255.0f;
         float b = (float)(color & 255) / 255.0f;
@@ -81,20 +124,8 @@ public abstract class AbsHud extends GuiIngame {
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         GlStateManager.color(r, g, b, a);
         buffer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION);
-        if (halfX > halfY) {
-            buffer.pos(center.x - halfX, center.y, 0.0d).endVertex();
-            buffer.pos(center.x - halfX + halfY, center.y + halfY, 0.0d).endVertex();
-            buffer.pos(center.x + halfX - halfY, center.y + halfY, 0.0d).endVertex();
-            buffer.pos(center.x + halfX, center.y, 0.0d).endVertex();
-            buffer.pos(center.x + halfX - halfY, center.y - halfY, 0.0d).endVertex();
-            buffer.pos(center.x - halfX + halfY, center.y - halfY, 0.0d).endVertex();
-        }else {
-            buffer.pos(center.x, center.y + halfY, 0.0d).endVertex();
-            buffer.pos(center.x + halfX, center.y + halfY - halfX, 0.0d).endVertex();
-            buffer.pos(center.x + halfX, center.y - halfY + halfX, 0.0d).endVertex();
-            buffer.pos(center.x, center.y - halfY, 0.0d).endVertex();
-            buffer.pos(center.x - halfX, center.y - halfY + halfX, 0.0d).endVertex();
-            buffer.pos(center.x - halfX, center.y + halfY - halfX, 0.0d).endVertex();
+        for (Vec2i v : vs) {
+            buffer.pos(v.x, v.y, 0.0d).endVertex();
         }
         tessellator.draw();
         GlStateManager.enableTexture2D();

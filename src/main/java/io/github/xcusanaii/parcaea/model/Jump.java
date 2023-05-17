@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Jump {
 
     public static ArrayList<Jump> jumps = new ArrayList<Jump>();
+
     public final String id;
     public final ArrayList<ArrayList<Number>> ticks;
 
