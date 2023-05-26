@@ -1,6 +1,7 @@
-package io.github.xcusanaii.parcaea.event;
+package io.github.xcusanaii.parcaea.event.handler.tick;
 
 import io.github.xcusanaii.parcaea.Parcaea;
+import io.github.xcusanaii.parcaea.model.KeyBinds;
 import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
 import io.github.xcusanaii.parcaea.model.input.InputStat;
 import io.github.xcusanaii.parcaea.render.InfoHud;
@@ -29,7 +30,7 @@ public class RecordHandler {
                 2,
                 2.0f
         ));
-        if (Parcaea.keyRestartChart.isPressed()) {
+        if (KeyBinds.keyRestartChart.isPressed()) {
             onStartRecord();
         }
         if (isWaitingInput && InputStat.isAnyKeyFired()) {

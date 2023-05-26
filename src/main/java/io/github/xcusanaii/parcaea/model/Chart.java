@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Chart {
 
-    public static ArrayList<Chart> charts = new ArrayList<Chart>();
+    public static List<Chart> charts = new ArrayList<Chart>();
     public static Chart selectedChart = null;
 
     public final String id;
@@ -24,6 +24,15 @@ public class Chart {
         this.keyTicks = toKeyNote(jump);
         this.mouseTicks = toMouseNote(jump);
         checkCanIgnoreDisplay();
+    }
+
+    public static Chart searchChart(String id) {
+        for (Chart chart : charts) {
+            if (chart.id.equals(id)) {
+                return chart;
+            }
+        }
+        return null;
     }
 
     public static void toChart() {

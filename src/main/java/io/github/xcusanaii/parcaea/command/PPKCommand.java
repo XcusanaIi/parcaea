@@ -1,7 +1,7 @@
 package io.github.xcusanaii.parcaea.command;
 
-import io.github.xcusanaii.parcaea.event.CommandMacroHandler;
-import io.github.xcusanaii.parcaea.event.RecordHandler;
+import io.github.xcusanaii.parcaea.event.handler.tick.CommandMacroHandler;
+import io.github.xcusanaii.parcaea.event.handler.tick.RecordHandler;
 import io.github.xcusanaii.parcaea.io.JumpLoader;
 import io.github.xcusanaii.parcaea.io.RecordSaver;
 import io.github.xcusanaii.parcaea.model.Chart;
@@ -46,7 +46,9 @@ public class PPKCommand extends CommandBase implements ICommand {
         }else if (args[0].equals("save")) {
             boolean bl;
             if (args.length > 1) {
-                bl = RecordSaver.saveLastInput(args[1]);
+                String str = buildString(args, 1);
+                str = str.matches("^\".*\"$") ? str.substring(1, str.length() - 1) : str;
+                bl = RecordSaver.saveLastInput(str);
             }else {
                 bl = RecordSaver.saveLastInput("record");
             }

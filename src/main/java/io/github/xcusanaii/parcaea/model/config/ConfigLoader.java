@@ -18,6 +18,9 @@ public class ConfigLoader {
         CfgGeneral.hudOffsetX = config.get("general", "hudOffsetX", 0).getInt();
         CfgGeneral.hudOffsetY = config.get("general", "hudOffsetY", 0).getInt();
         CfgGeneral.enableSoundEffect = config.get("general", "enableSoundEffect", true).getBoolean();
+        CfgGeneral.enableSegment = config.get("general", "enableSegment", false).getBoolean();
+        CfgGeneral.segmentViewDistance = config.get("general", "segmentViewDistance", 16).getInt();
+        CfgGeneral.barrierDistance = config.get("general", "barrierDistance", 16).getInt();
 
         CfgBasic.basicHudWidth = config.get("hud.basic", "basicHudWidth", 400).getInt();
         CfgBasic.basicHudHeight = config.get("hud.basic", "basicHudHeight", 300).getInt();
@@ -47,6 +50,9 @@ public class ConfigLoader {
         config.get("general", "hudOffsetX", 0).set(CfgGeneral.hudOffsetX);
         config.get("general", "hudOffsetY", 0).set(CfgGeneral.hudOffsetY);
         config.get("general", "enableSoundEffect", true).set(CfgGeneral.enableSoundEffect);
+        config.get("general", "enableSegment", false).set(CfgGeneral.enableSegment);
+        config.get("general", "segmentViewDistance", 16).set(CfgGeneral.segmentViewDistance);
+        config.get("general", "barrierDistance", 16).set(CfgGeneral.barrierDistance);
 
         config.get("hud.basic", "basicHudWidth", 400).set(CfgBasic.basicHudWidth);
         config.get("hud.basic", "basicHudHeight", 300).set(CfgBasic.basicHudHeight);

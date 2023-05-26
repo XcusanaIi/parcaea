@@ -3,10 +3,8 @@ package io.github.xcusanaii.parcaea.io;
 import io.github.xcusanaii.parcaea.Parcaea;
 import io.github.xcusanaii.parcaea.model.input.InputStat;
 import io.github.xcusanaii.parcaea.model.input.InputTick;
-
+import io.github.xcusanaii.parcaea.util.FileUtil;
 import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class RecordSaver {
 
@@ -16,14 +14,8 @@ public class RecordSaver {
         if (InputStat.lastInput.size() <= 1) return false;
         tweakSprint();
         jumpName = jumpName.equals("") ? "record" : jumpName;
-        String fileName = Parcaea.FILE_PATH + "/jumps/" + jumpName + ".txt";
-        File file = new File(fileName);
-        if (file.exists()) {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-            String timestamp = formatter.format(new Date());
-            String newFileName = fileName.substring(0, fileName.lastIndexOf('.')) + "_" + timestamp + fileName.substring(fileName.lastIndexOf('.'));
-            file = new File(newFileName);
-        }
+        String fileName = Parcaea.FILE_PATH + "/jumps/" + jumpName;
+        File file = FileUtil.getUniqueFile(fileName, ".txt");
         try {
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);

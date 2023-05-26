@@ -12,4 +12,7 @@ public class CfgGeneral {
     public static int hudOffsetX = 0;
     public static int hudOffsetY = 0;
     public static boolean enableSoundEffect = true;
+    public static boolean enableSegment = false;
+    public static int segmentViewDistance = 16;
+    public static int barrierDistance = 16;
 }

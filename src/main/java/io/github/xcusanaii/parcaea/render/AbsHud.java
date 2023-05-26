@@ -1,6 +1,6 @@
 package io.github.xcusanaii.parcaea.render;
 
-import io.github.xcusanaii.parcaea.event.NoteHandler;
+import io.github.xcusanaii.parcaea.event.handler.tick.NoteHandler;
 import io.github.xcusanaii.parcaea.model.Chart;
 import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
 import io.github.xcusanaii.parcaea.util.math.Vec2i;

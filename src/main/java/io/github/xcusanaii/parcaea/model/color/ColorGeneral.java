@@ -1,6 +1,11 @@
 package io.github.xcusanaii.parcaea.model.color;
 
 public class ColorGeneral {
+    public static int BARRIER = 0xFFFF4500;
+    public static int COORD_MARKER_BG = 0x3F000000;
+    public static int LABEL = 16777120;
+    public static int BTN_ENABLE = 0xFF00DD00;
+    public static int BTN_DISABLE = 0xFFDD0000;
     public static int YELLOW_ALPHA = 0xBBF2EEA2;
     public static int BLUE_ALPHA = 0xBB9CCDFC;
     public static int PINK_ALPHA = 0xBBFD84A1;

@@ -1,6 +1,7 @@
 package io.github.xcusanaii.parcaea.render.gui;
 
 import io.github.xcusanaii.parcaea.Parcaea;
+import io.github.xcusanaii.parcaea.model.KeyBinds;
 import io.github.xcusanaii.parcaea.util.widget.PGuiButton;
 import io.github.xcusanaii.parcaea.util.widget.PGuiSlider;
 import net.minecraft.client.Minecraft;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static io.github.xcusanaii.parcaea.model.KeyBinds.*;
 import static io.github.xcusanaii.parcaea.util.KeyMouse.getKeyName;
 
 public class GuiPKControls extends GuiScreen {
@@ -41,14 +43,14 @@ public class GuiPKControls extends GuiScreen {
         selectedBtn = null;
         keyBinds = Arrays.asList(Parcaea.PK_KEY_BINDS);
         keyBinds = new ArrayList<KeyBinding>(keyBinds);
-        keyBinds.add(Parcaea.keyIntenseSpaceLeft);
-        keyBinds.add(Parcaea.keyIntenseSpaceRight);
+        keyBinds.add(KeyBinds.keyIntenseSpaceLeft);
+        keyBinds.add(KeyBinds.keyIntenseSpaceRight);
         keyBinds.add(mc.gameSettings.keyBindAttack);
         keyBinds.add(mc.gameSettings.keyBindUseItem);
-        keyBinds.add(Parcaea.keyDoubleTapWA);
-        keyBinds.add(Parcaea.keyDoubleTapWD);
-        keyBinds.add(Parcaea.keyDoubleTapSA);
-        keyBinds.add(Parcaea.keyDoubleTapSD);
+        keyBinds.add(KeyBinds.keyDoubleTapWA);
+        keyBinds.add(KeyBinds.keyDoubleTapWD);
+        keyBinds.add(KeyBinds.keyDoubleTapSA);
+        keyBinds.add(KeyBinds.keyDoubleTapSD);
 
         x = (this.width - screenWidth) / 2;
         y = (this.height -screenHeight) / 2;
@@ -154,42 +156,42 @@ public class GuiPKControls extends GuiScreen {
     }
 
     private void syncKeyBinds() {
-        if (Parcaea.keyDoubleTapWA.getKeyCode() != 0 && keyCodeDoubleTapPreWA == 0) {
-            keyCodeDoubleTapPreWA = Parcaea.keyDoubleTapWA.getKeyCode();
-            mc.gameSettings.keyBindForward.setKeyCode(-2);
-            mc.gameSettings.keyBindLeft.setKeyCode(-3);
+        if (KeyBinds.keyDoubleTapWA.getKeyCode() != 0 && keyCodeDoubleTapPreWA == 0) {
+            keyCodeDoubleTapPreWA = KeyBinds.keyDoubleTapWA.getKeyCode();
+            mc.gameSettings.keyBindForward.setKeyCode(keyBindForwardMap);
+            mc.gameSettings.keyBindLeft.setKeyCode(keyBindLeftMap);
         }
-        if (Parcaea.keyDoubleTapWA.getKeyCode() == 0 && keyCodeDoubleTapPreWA != 0){
+        if (KeyBinds.keyDoubleTapWA.getKeyCode() == 0 && keyCodeDoubleTapPreWA != 0){
             keyCodeDoubleTapPreWA = 0;
             mc.gameSettings.keyBindForward.setKeyCode(mc.gameSettings.keyBindForward.getKeyCodeDefault());
             mc.gameSettings.keyBindLeft.setKeyCode(mc.gameSettings.keyBindLeft.getKeyCodeDefault());
         }
-        if (Parcaea.keyDoubleTapWD.getKeyCode() != 0 && keyCodeDoubleTapPreWD == 0) {
-            keyCodeDoubleTapPreWD = Parcaea.keyDoubleTapWD.getKeyCode();
-            mc.gameSettings.keyBindForward.setKeyCode(-2);
-            mc.gameSettings.keyBindRight.setKeyCode(-5);
+        if (KeyBinds.keyDoubleTapWD.getKeyCode() != 0 && keyCodeDoubleTapPreWD == 0) {
+            keyCodeDoubleTapPreWD = KeyBinds.keyDoubleTapWD.getKeyCode();
+            mc.gameSettings.keyBindForward.setKeyCode(keyBindForwardMap);
+            mc.gameSettings.keyBindRight.setKeyCode(keyBindRightMap);
         }
-        if (Parcaea.keyDoubleTapWD.getKeyCode() == 0 && keyCodeDoubleTapPreWD != 0){
+        if (KeyBinds.keyDoubleTapWD.getKeyCode() == 0 && keyCodeDoubleTapPreWD != 0){
             keyCodeDoubleTapPreWD = 0;
             mc.gameSettings.keyBindForward.setKeyCode(mc.gameSettings.keyBindForward.getKeyCodeDefault());
             mc.gameSettings.keyBindRight.setKeyCode(mc.gameSettings.keyBindRight.getKeyCodeDefault());
         }
-        if (Parcaea.keyDoubleTapSA.getKeyCode() != 0 && keyCodeDoubleTapPreSA == 0) {
-            keyCodeDoubleTapPreSA = Parcaea.keyDoubleTapSA.getKeyCode();
-            mc.gameSettings.keyBindBack.setKeyCode(-4);
-            mc.gameSettings.keyBindLeft.setKeyCode(-3);
+        if (KeyBinds.keyDoubleTapSA.getKeyCode() != 0 && keyCodeDoubleTapPreSA == 0) {
+            keyCodeDoubleTapPreSA = KeyBinds.keyDoubleTapSA.getKeyCode();
+            mc.gameSettings.keyBindBack.setKeyCode(keyBindBackMap);
+            mc.gameSettings.keyBindLeft.setKeyCode(keyBindLeftMap);
         }
-        if (Parcaea.keyDoubleTapSA.getKeyCode() == 0 && keyCodeDoubleTapPreSA != 0){
+        if (KeyBinds.keyDoubleTapSA.getKeyCode() == 0 && keyCodeDoubleTapPreSA != 0){
             keyCodeDoubleTapPreSA = 0;
             mc.gameSettings.keyBindBack.setKeyCode(mc.gameSettings.keyBindBack.getKeyCodeDefault());
             mc.gameSettings.keyBindLeft.setKeyCode(mc.gameSettings.keyBindLeft.getKeyCodeDefault());
         }
-        if (Parcaea.keyDoubleTapSD.getKeyCode() != 0 && keyCodeDoubleTapPreSD == 0) {
-            keyCodeDoubleTapPreSD = Parcaea.keyDoubleTapSD.getKeyCode();
-            mc.gameSettings.keyBindBack.setKeyCode(-2);
-            mc.gameSettings.keyBindRight.setKeyCode(-5);
+        if (KeyBinds.keyDoubleTapSD.getKeyCode() != 0 && keyCodeDoubleTapPreSD == 0) {
+            keyCodeDoubleTapPreSD = KeyBinds.keyDoubleTapSD.getKeyCode();
+            mc.gameSettings.keyBindBack.setKeyCode(keyBindBackMap);
+            mc.gameSettings.keyBindRight.setKeyCode(keyBindRightMap);
         }
-        if (Parcaea.keyDoubleTapSD.getKeyCode() == 0 && keyCodeDoubleTapPreSD != 0){
+        if (KeyBinds.keyDoubleTapSD.getKeyCode() == 0 && keyCodeDoubleTapPreSD != 0){
             keyCodeDoubleTapPreSD = 0;
             mc.gameSettings.keyBindBack.setKeyCode(mc.gameSettings.keyBindBack.getKeyCodeDefault());
             mc.gameSettings.keyBindRight.setKeyCode(mc.gameSettings.keyBindRight.getKeyCodeDefault());

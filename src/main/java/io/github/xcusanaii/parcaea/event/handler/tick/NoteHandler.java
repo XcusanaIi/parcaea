@@ -1,7 +1,8 @@
-package io.github.xcusanaii.parcaea.event;
+package io.github.xcusanaii.parcaea.event.handler.tick;
 
 import io.github.xcusanaii.parcaea.Parcaea;
 import io.github.xcusanaii.parcaea.model.Chart;
+import io.github.xcusanaii.parcaea.model.KeyBinds;
 import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
 import io.github.xcusanaii.parcaea.model.input.InputStat;
 import io.github.xcusanaii.parcaea.model.input.InputTick;
@@ -25,7 +26,7 @@ public abstract class NoteHandler {
 
     public void onClientTickPre() {
         if (!CfgGeneral.enableParcaea) return;
-        if (Parcaea.keyRestartChart.isPressed()) {
+        if (KeyBinds.keyRestartChart.isPressed()) {
             if (CfgGeneral.enable45S) {
                 init45S();
             }else if (Chart.selectedChart != null){

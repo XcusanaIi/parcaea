@@ -1,12 +1,20 @@
 package io.github.xcusanaii.parcaea.event;
 
 import io.github.xcusanaii.parcaea.Parcaea;
+import io.github.xcusanaii.parcaea.event.handler.*;
+import io.github.xcusanaii.parcaea.event.handler.tick.*;
+import io.github.xcusanaii.parcaea.model.KeyBinds;
 import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
 import io.github.xcusanaii.parcaea.model.input.InputStat;
+import io.github.xcusanaii.parcaea.model.segment.CoordStrategy;
+import io.github.xcusanaii.parcaea.model.segment.Segment;
+import io.github.xcusanaii.parcaea.render.entity.CoordMarker;
 import io.github.xcusanaii.parcaea.render.gui.GuiMenu;
+import io.github.xcusanaii.parcaea.render.gui.GuiNewCoordStrategy;
 import io.github.xcusanaii.parcaea.util.KeyMouse;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
@@ -16,9 +24,10 @@ public class TickHandler {
     private static final Minecraft mc = Minecraft.getMinecraft();
     public static NoteHandler noteHandler = null;
     public static InfoHandler infoHandler = new InfoHandler();
-    public static AdvancedInputHandler advancedInputHandler = new AdvancedInputHandler();
+    public static AdvInputHandler advInputHandler = new AdvInputHandler();
     public static CommandMacroHandler commandMacroHandler = new CommandMacroHandler();
     public static RecordHandler recordHandler = new RecordHandler();
+    public static AutoCoordHandler autoCoordHandler = new AutoCoordHandler();
 
     public static boolean advInputKeyBindJumpPressed = false;
     public static boolean advInputKeyBindForwardPressed = false;
@@ -31,9 +40,9 @@ public class TickHandler {
 
     @SubscribeEvent
     public void onClientTick(ClientTickEvent event) {
-        if (mc.thePlayer == null || !CfgGeneral.enableMod) return;
+        if (mc.thePlayer == null || mc.theWorld == null || !CfgGeneral.enableMod) return;
         if (event.phase == TickEvent.Phase.END) {
-            advancedInputHandler.onClientTickPost();
+            advInputHandler.onClientTickPost();
             if (RecordHandler.isInRecord) {
                 recordHandler.onClientTickPost();
             }else {
@@ -47,20 +56,34 @@ public class TickHandler {
             syncKeyInputStatOnClientTickPost();
         }else {
             syncKeyInputStatOnClientTickPre();
-            advancedInputHandler.onClientTickPre();
+            advInputHandler.onClientTickPre();
             if (RecordHandler.isInRecord) {
                 recordHandler.onClientTickPre();
             }else {
                 noteHandler.onClientTickPre();
             }
             commandMacroHandler.onClientTickPre();
-            if (Parcaea.keyMenu.isPressed()) {
+            if (KeyBinds.keyMenu.isPressed()) {
                 mc.displayGuiScreen(new GuiMenu());
             }
-            if (Parcaea.keyRestartChart.isKeyDown() && CfgGeneral.enableAutoPos && mc.currentScreen == null && !autoRightClicked) {
+            if (KeyBinds.keyRestartChart.isKeyDown() && CfgGeneral.enableAutoPos && mc.currentScreen == null && !autoRightClicked) {
                 autoRightClicked = true;
                 KeyBinding.setKeyBindState(mc.gameSettings.keyBindUseItem.getKeyCode(), true);
             }
+            if (KeyBinds.keyNewCoordStrategy.isPressed()) {
+                mc.displayGuiScreen(new GuiNewCoordStrategy());
+            }
+            if (KeyBinds.keyDeleteCoordStrategy.isPressed()) {
+                Segment.removeNearestCoordMarker();
+            }
+            if (KeyBinds.keyAcscCoordStrategy.isPressed()) {
+                CoordMarker nearestCoordMarker = Segment.findNearestCoordMarker();
+                if (nearestCoordMarker != null) {
+                    AutoCoordHandler.coordStrategy = nearestCoordMarker.coordStrategy;
+                    AutoCoordHandler.onStartAC();
+                }
+            }
+            autoCoordHandler.onClientTickPre();
         }
     }
 

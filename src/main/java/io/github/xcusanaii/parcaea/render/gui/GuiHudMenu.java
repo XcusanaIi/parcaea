@@ -1,6 +1,7 @@
 package io.github.xcusanaii.parcaea.render.gui;
 
 import io.github.xcusanaii.parcaea.Parcaea;
+import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
 import io.github.xcusanaii.parcaea.render.gui.hudmenu.GuiBasicHudMenu;
 import io.github.xcusanaii.parcaea.util.widget.PGuiButton;
 import net.minecraft.client.gui.GuiButton;
@@ -48,7 +49,7 @@ public class GuiHudMenu extends GuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        drawCenteredString(fontRendererObj, I18n.format("txt.default_style"), x + 50, y + 5, 16777120);
+        drawCenteredString(fontRendererObj, I18n.format("txt.default_style"), x + 50, y + 5, ColorGeneral.LABEL);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

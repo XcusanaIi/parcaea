@@ -1,6 +1,7 @@
-package io.github.xcusanaii.parcaea.event;
+package io.github.xcusanaii.parcaea.event.handler.tick;
 
 import io.github.xcusanaii.parcaea.Parcaea;
+import io.github.xcusanaii.parcaea.model.KeyBinds;
 import net.minecraft.client.Minecraft;
 
 public class CommandMacroHandler {
@@ -13,7 +14,7 @@ public class CommandMacroHandler {
     public static boolean toggleMsg = false;
 
     public void onClientTickPre() {
-        if (Parcaea.keyQuickCommandMacro.isPressed() && mc.thePlayer != null) {
+        if (KeyBinds.keyQuickCommandMacro.isPressed() && mc.thePlayer != null) {
             toggleMsg = !toggleMsg;
             String msg = toggleMsg ? msg1 : msg2;
             mc.thePlayer.sendChatMessage(msg);

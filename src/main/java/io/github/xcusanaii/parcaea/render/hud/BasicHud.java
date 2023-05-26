@@ -1,9 +1,9 @@
 package io.github.xcusanaii.parcaea.render.hud;
 
 import io.github.xcusanaii.parcaea.Parcaea;
-import io.github.xcusanaii.parcaea.event.NoteHandler;
+import io.github.xcusanaii.parcaea.event.handler.tick.NoteHandler;
 import io.github.xcusanaii.parcaea.event.TickHandler;
-import io.github.xcusanaii.parcaea.event.note.BasicNoteHandler;
+import io.github.xcusanaii.parcaea.event.handler.tick.note.BasicNoteHandler;
 import io.github.xcusanaii.parcaea.model.input.InputStat;
 import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
 import io.github.xcusanaii.parcaea.model.config.CfgBasic;

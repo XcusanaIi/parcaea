@@ -1,4 +1,4 @@
-package io.github.xcusanaii.parcaea.event;
+package io.github.xcusanaii.parcaea.event.handler.tick;
 
 import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
 import net.minecraft.client.Minecraft;

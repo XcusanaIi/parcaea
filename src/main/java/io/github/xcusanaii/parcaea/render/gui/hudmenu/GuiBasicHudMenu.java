@@ -15,7 +15,7 @@ import net.minecraft.client.resources.I18n;
 import org.lwjgl.input.Mouse;
 import java.io.IOException;
 
-public class GuiBasicHudMenu extends GuiScreen {
+public class GuiBasicHudMenu extends AGuiHudMenu {
 
     private PGuiSlider sldOffsetX, sldOffsetY;
     private PGuiSlider sldWidth;

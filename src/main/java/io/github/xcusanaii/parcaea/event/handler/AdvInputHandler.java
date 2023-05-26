@@ -1,6 +1,7 @@
-package io.github.xcusanaii.parcaea.event;
+package io.github.xcusanaii.parcaea.event.handler;
 
-import io.github.xcusanaii.parcaea.Parcaea;
+import io.github.xcusanaii.parcaea.event.TickHandler;
+import io.github.xcusanaii.parcaea.model.KeyBinds;
 import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
 import io.github.xcusanaii.parcaea.render.InfoHud;
 import io.github.xcusanaii.parcaea.util.KeyMouse;
@@ -9,7 +10,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
 
-public class AdvancedInputHandler {
+import static io.github.xcusanaii.parcaea.model.KeyBinds.keyBindSprintMap;
+
+public class AdvInputHandler {
 
     private static final Minecraft mc = Minecraft.getMinecraft();
 
@@ -27,17 +30,17 @@ public class AdvancedInputHandler {
 
     public void onClientTickPre() {
         keyBindSprint = mc.gameSettings.keyBindSprint;
-        if (Parcaea.keyToggleInvertSprint.isPressed()) {
+        if (KeyBinds.keyToggleInvertSprint.isPressed()) {
             invertSprint = !invertSprint;
             if (invertSprint) {
                 sprintKeyCodePre = keyBindSprint.getKeyCode();
-                keyBindSprint.setKeyCode(-1);
-                Parcaea.keyInvertSprint.setKeyCode(sprintKeyCodePre);
+                keyBindSprint.setKeyCode(keyBindSprintMap);
+                KeyBinds.keyInvertSprint.setKeyCode(sprintKeyCodePre);
                 KeyBinding.resetKeyBindingArrayAndHash();
                 KeyBinding.setKeyBindState(keyBindSprint.getKeyCode(), true);
             }else {
                 keyBindSprint.setKeyCode(sprintKeyCodePre);
-                Parcaea.keyInvertSprint.setKeyCode(Parcaea.keyInvertSprint.getKeyCodeDefault());
+                KeyBinds.keyInvertSprint.setKeyCode(KeyBinds.keyInvertSprint.getKeyCodeDefault());
                 KeyBinding.resetKeyBindingArrayAndHash();
                 KeyBinding.setKeyBindState(keyBindSprint.getKeyCode(), false);
             }
@@ -52,80 +55,56 @@ public class AdvancedInputHandler {
         }
     }
 
-    public static void onRenderTickPost() {
+    public static void onRenderGameOverlayEventPost() {
         if (mc.currentScreen != null) return;
         keyBindJump = mc.gameSettings.keyBindJump;
-        if (KeyMouse.isKeyOrMouseDown(Parcaea.keyIntenseSpaceLeft.getKeyCode()) && !keyIntenseSpacePressed && !intenseSpaceLeftPressedPre) {
+        if (KeyMouse.isKeyOrMouseDown(KeyBinds.keyIntenseSpaceLeft.getKeyCode()) && !keyIntenseSpacePressed && !intenseSpaceLeftPressedPre) {
             keyIntenseSpacePressed = true;
-//            KeyBinding.setKeyBindState(keyBindJump.getKeyCode(), true);
             TickHandler.advInputKeyBindJumpPressed = true;
         }
-        intenseSpaceLeftPressedPre = KeyMouse.isKeyOrMouseDown(Parcaea.keyIntenseSpaceLeft.getKeyCode());
-        if (KeyMouse.isKeyOrMouseDown(Parcaea.keyIntenseSpaceRight.getKeyCode()) && !keyIntenseSpacePressed && !intenseSpaceRightPressedPre) {
+        intenseSpaceLeftPressedPre = KeyMouse.isKeyOrMouseDown(KeyBinds.keyIntenseSpaceLeft.getKeyCode());
+        if (KeyMouse.isKeyOrMouseDown(KeyBinds.keyIntenseSpaceRight.getKeyCode()) && !keyIntenseSpacePressed && !intenseSpaceRightPressedPre) {
             keyIntenseSpacePressed = true;
-//            KeyBinding.setKeyBindState(keyBindJump.getKeyCode(), true);
             TickHandler.advInputKeyBindJumpPressed = true;
         }
-        intenseSpaceRightPressedPre = KeyMouse.isKeyOrMouseDown(Parcaea.keyIntenseSpaceRight.getKeyCode());
+        intenseSpaceRightPressedPre = KeyMouse.isKeyOrMouseDown(KeyBinds.keyIntenseSpaceRight.getKeyCode());
 
-        KeyBinding keyBindForward = mc.gameSettings.keyBindForward;
-        KeyBinding keyBindLeft = mc.gameSettings.keyBindLeft;
-        KeyBinding keyBindBack = mc.gameSettings.keyBindBack;
-        KeyBinding keyBindRight = mc.gameSettings.keyBindRight;
-
-        if (Parcaea.keyDoubleTapWA.getKeyCode() != 0) {
-//            KeyBinding.setKeyBindState(keyBindForward.getKeyCode(), false);
-//            KeyBinding.setKeyBindState(keyBindLeft.getKeyCode(), false);
+        if (KeyBinds.keyDoubleTapWA.getKeyCode() != 0) {
             TickHandler.advInputKeyBindForwardPressed = false;
             TickHandler.advInputKeyBindLeftPressed = false;
         }
-        if (Parcaea.keyDoubleTapWD.getKeyCode() != 0) {
-//            KeyBinding.setKeyBindState(keyBindForward.getKeyCode(), false);
-//            KeyBinding.setKeyBindState(keyBindRight.getKeyCode(), false);
+        if (KeyBinds.keyDoubleTapWD.getKeyCode() != 0) {
             TickHandler.advInputKeyBindForwardPressed = false;
             TickHandler.advInputKeyBindRightPressed = false;
         }
-        if (Parcaea.keyDoubleTapSA.getKeyCode() != 0) {
-//            KeyBinding.setKeyBindState(keyBindBack.getKeyCode(), false);
-//            KeyBinding.setKeyBindState(keyBindLeft.getKeyCode(), false);
+        if (KeyBinds.keyDoubleTapSA.getKeyCode() != 0) {
             TickHandler.advInputKeyBindBackPressed = false;
             TickHandler.advInputKeyBindLeftPressed = false;
         }
-        if (Parcaea.keyDoubleTapSD.getKeyCode() != 0) {
-//            KeyBinding.setKeyBindState(keyBindBack.getKeyCode(), false);
-//            KeyBinding.setKeyBindState(keyBindRight.getKeyCode(), false);
+        if (KeyBinds.keyDoubleTapSD.getKeyCode() != 0) {
             TickHandler.advInputKeyBindBackPressed = false;
             TickHandler.advInputKeyBindRightPressed = false;
         }
 
-        if (Parcaea.keyDoubleTapWA.getKeyCode() != 0 && KeyMouse.isKeyOrMouseDown(Parcaea.keyDoubleTapWA.getKeyCode())) {
-//            KeyBinding.setKeyBindState(keyBindForward.getKeyCode(), true);
-//            KeyBinding.setKeyBindState(keyBindLeft.getKeyCode(), true);
+        if (KeyBinds.keyDoubleTapWA.getKeyCode() != 0 && KeyMouse.isKeyOrMouseDown(KeyBinds.keyDoubleTapWA.getKeyCode())) {
             TickHandler.advInputKeyBindForwardPressed = true;
             TickHandler.advInputKeyBindLeftPressed = true;
         }
-        if (Parcaea.keyDoubleTapWD.getKeyCode() != 0 && KeyMouse.isKeyOrMouseDown(Parcaea.keyDoubleTapWD.getKeyCode())) {
-//            KeyBinding.setKeyBindState(keyBindForward.getKeyCode(), true);
-//            KeyBinding.setKeyBindState(keyBindRight.getKeyCode(), true);
+        if (KeyBinds.keyDoubleTapWD.getKeyCode() != 0 && KeyMouse.isKeyOrMouseDown(KeyBinds.keyDoubleTapWD.getKeyCode())) {
             TickHandler.advInputKeyBindForwardPressed = true;
             TickHandler.advInputKeyBindRightPressed = true;
         }
-        if (Parcaea.keyDoubleTapSA.getKeyCode() != 0 && KeyMouse.isKeyOrMouseDown(Parcaea.keyDoubleTapSA.getKeyCode())) {
-//            KeyBinding.setKeyBindState(keyBindBack.getKeyCode(), true);
-//            KeyBinding.setKeyBindState(keyBindLeft.getKeyCode(), true);
+        if (KeyBinds.keyDoubleTapSA.getKeyCode() != 0 && KeyMouse.isKeyOrMouseDown(KeyBinds.keyDoubleTapSA.getKeyCode())) {
             TickHandler.advInputKeyBindBackPressed = true;
             TickHandler.advInputKeyBindLeftPressed = true;
         }
-        if (Parcaea.keyDoubleTapSD.getKeyCode() != 0 && KeyMouse.isKeyOrMouseDown(Parcaea.keyDoubleTapSD.getKeyCode())) {
-//            KeyBinding.setKeyBindState(keyBindBack.getKeyCode(), true);
-//            KeyBinding.setKeyBindState(keyBindRight.getKeyCode(), true);
+        if (KeyBinds.keyDoubleTapSD.getKeyCode() != 0 && KeyMouse.isKeyOrMouseDown(KeyBinds.keyDoubleTapSD.getKeyCode())) {
             TickHandler.advInputKeyBindBackPressed = true;
             TickHandler.advInputKeyBindRightPressed = true;
         }
 
         if (invertSprint) {
-//            KeyBinding.setKeyBindState(keyBindSprint.getKeyCode(), !KeyMouse.isKeyOrMouseDown(Parcaea.keyInvertSprint.getKeyCode()));
-            TickHandler.advInputKeyBindSprintPressed = !KeyMouse.isKeyOrMouseDown(Parcaea.keyInvertSprint.getKeyCode());
+            TickHandler.advInputKeyBindSprintPressed = !KeyMouse.isKeyOrMouseDown(KeyBinds.keyInvertSprint.getKeyCode());
         }
     }
 
