@@ -1,5 +1,6 @@
-package io.github.xcusanaii.parcaea.util.widget;
+package io.github.xcusanaii.parcaea.render.gui.widget;
 
+import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiPageButtonList;
 import net.minecraft.client.gui.GuiSlider;
@@ -91,8 +92,9 @@ public class PGuiSlider extends PGuiButton{
             }
 
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-            this.drawTexturedModalRect(this.xPosition + (int)(this.sliderPosition * (float)(this.width - 8)), this.yPosition, 0, 66, 4, 20);
-            this.drawTexturedModalRect(this.xPosition + (int)(this.sliderPosition * (float)(this.width - 8)) + 4, this.yPosition, 196, 66, 4, 20);
+            int left = this.xPosition + (int)(this.sliderPosition * (float)(this.width - 8));
+            int top = this.yPosition;
+            drawRect(left, top, left + 4, top + 20, ColorGeneral.SLIDER_BUTTON);
         }
     }
 

@@ -1,4 +1,4 @@
-package io.github.xcusanaii.parcaea.util.widget;
+package io.github.xcusanaii.parcaea.render.gui.widget;
 
 import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
 import net.minecraft.client.Minecraft;

@@ -3,7 +3,7 @@ package io.github.xcusanaii.parcaea.render.gui;
 import io.github.xcusanaii.parcaea.Parcaea;
 import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
 import io.github.xcusanaii.parcaea.render.gui.hudmenu.GuiBasicHudMenu;
-import io.github.xcusanaii.parcaea.util.widget.PGuiButton;
+import io.github.xcusanaii.parcaea.render.gui.widget.PGuiButton;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;

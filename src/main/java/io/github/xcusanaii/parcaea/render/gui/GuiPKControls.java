@@ -2,8 +2,8 @@ package io.github.xcusanaii.parcaea.render.gui;
 
 import io.github.xcusanaii.parcaea.Parcaea;
 import io.github.xcusanaii.parcaea.model.KeyBinds;
-import io.github.xcusanaii.parcaea.util.widget.PGuiButton;
-import io.github.xcusanaii.parcaea.util.widget.PGuiSlider;
+import io.github.xcusanaii.parcaea.render.gui.widget.PGuiButton;
+import io.github.xcusanaii.parcaea.render.gui.widget.PGuiSlider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiPageButtonList;

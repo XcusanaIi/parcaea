@@ -1,4 +1,4 @@
-package io.github.xcusanaii.parcaea.util.widget;
+package io.github.xcusanaii.parcaea.render.gui.widget;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;

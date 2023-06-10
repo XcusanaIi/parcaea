@@ -5,11 +5,10 @@ import io.github.xcusanaii.parcaea.event.TickHandler;
 import io.github.xcusanaii.parcaea.model.Chart;
 import io.github.xcusanaii.parcaea.model.config.CfgBasic;
 import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
-import io.github.xcusanaii.parcaea.util.widget.PGuiButton;
-import io.github.xcusanaii.parcaea.util.widget.PGuiSlider;
+import io.github.xcusanaii.parcaea.render.gui.widget.PGuiButton;
+import io.github.xcusanaii.parcaea.render.gui.widget.PGuiSlider;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiPageButtonList;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiSlider;
 import net.minecraft.client.resources.I18n;
 import org.lwjgl.input.Mouse;
@@ -43,7 +42,8 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
             @Override
             public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {}
             @Override
-            public void onTick(int id, float value) {CfgGeneral.hudOffsetX = (int) value;syncHud();}
+            public void onTick(int id, float value) {CfgGeneral.hudOffsetX = (int) value;
+                syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
         }, 100, x, y, "cfg.basic.offset_x", -800.0f, 800.0f, CfgGeneral.hudOffsetX, new GuiSlider.FormatHelper() {
@@ -56,7 +56,8 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
             @Override
             public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {}
             @Override
-            public void onTick(int id, float value) {CfgGeneral.hudOffsetY = (int) value;syncHud();}
+            public void onTick(int id, float value) {CfgGeneral.hudOffsetY = (int) value;
+                syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
         }, 100, x, y + 25, "cfg.basic.offset_y", -600.0f, 600.0f, CfgGeneral.hudOffsetY, new GuiSlider.FormatHelper() {
@@ -69,7 +70,8 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
             @Override
             public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {}
             @Override
-            public void onTick(int id, float value) {CfgBasic.basicHudWidth = (int) value;syncHud();}
+            public void onTick(int id, float value) {CfgBasic.basicHudWidth = (int) value;
+                syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
         }, 100, x, y + 50, "cfg.basic.width", 200.0f, 800.0f, CfgBasic.basicHudWidth, new GuiSlider.FormatHelper() {
@@ -82,7 +84,8 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
             @Override
             public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {}
             @Override
-            public void onTick(int id, float value) {CfgBasic.basicHudHeight = (int) value;syncHud();}
+            public void onTick(int id, float value) {CfgBasic.basicHudHeight = (int) value;
+                syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
         }, 100, x, y + 75, "cfg.basic.height", 150.0f, 600.0f, CfgBasic.basicHudHeight, new GuiSlider.FormatHelper() {
@@ -95,7 +98,8 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
             @Override
             public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {}
             @Override
-            public void onTick(int id, float value) {CfgBasic.basicJLineOffsetY = (int) value;syncHud();}
+            public void onTick(int id, float value) {CfgBasic.basicJLineOffsetY = (int) value;
+                syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
         }, 100, x, y + 100, "cfg.basic.j_line_offset_y", 20.0f, 80.0f, CfgBasic.basicJLineOffsetY, new GuiSlider.FormatHelper() {
@@ -108,7 +112,8 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
             @Override
             public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {}
             @Override
-            public void onTick(int id, float value) {CfgBasic.basicMouseTrackPaddingRatio = value;syncHud();}
+            public void onTick(int id, float value) {CfgBasic.basicMouseTrackPaddingRatio = value;
+                syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
         }, 100, x, y + 125, "cfg.basic.mouse_track_padding_ratio", 0.0f, 0.5f, (float) CfgBasic.basicMouseTrackPaddingRatio, new GuiSlider.FormatHelper() {
@@ -121,7 +126,8 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
             @Override
             public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {}
             @Override
-            public void onTick(int id, float value) {CfgBasic.basicHudBGOpacity = (int) value;syncHud();}
+            public void onTick(int id, float value) {CfgBasic.basicHudBGOpacity = (int) value;
+                syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
         }, 100, x, y + 150, "cfg.basic.bg_opacity", 0.0f, 100.0f, CfgBasic.basicHudBGOpacity, new GuiSlider.FormatHelper() {
@@ -134,7 +140,8 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
             @Override
             public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {}
             @Override
-            public void onTick(int id, float value) {CfgBasic.basicHudBGPadding = (int) value;syncHud();}
+            public void onTick(int id, float value) {CfgBasic.basicHudBGPadding = (int) value;
+                syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
         }, 100, x, y + 175, "cfg.basic.bg_padding", 0.0f, 50.0f, CfgBasic.basicHudBGPadding, new GuiSlider.FormatHelper() {
@@ -147,7 +154,8 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
             @Override
             public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {}
             @Override
-            public void onTick(int id, float value) {CfgBasic.basicKeyNoteSize = value;syncHud();}
+            public void onTick(int id, float value) {CfgBasic.basicKeyNoteSize = value;
+                syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
         }, 100, x, y + 200, "cfg.basic.key_note_size", 0.1f, 1.0f, (float) CfgBasic.basicKeyNoteSize, new GuiSlider.FormatHelper() {
@@ -160,7 +168,8 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
             @Override
             public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {}
             @Override
-            public void onTick(int id, float value) {CfgBasic.basicMouseIndicatorSize = value;syncHud();}
+            public void onTick(int id, float value) {CfgBasic.basicMouseIndicatorSize = value;
+                syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
         }, 100, x, y + 225, "cfg.basic.mouse_indicator_size", 0.1f, 1.0f, (float) CfgBasic.basicMouseIndicatorSize, new GuiSlider.FormatHelper() {
@@ -173,7 +182,8 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
             @Override
             public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {}
             @Override
-            public void onTick(int id, float value) {CfgBasic.basicMouseNoteSizeRatio = value;syncHud();}
+            public void onTick(int id, float value) {CfgBasic.basicMouseNoteSizeRatio = value;
+                syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
         }, 100, x, y + 250, "cfg.basic.mouse_note_size_ratio", 0.1f, 1.0f, (float) CfgBasic.basicMouseNoteSizeRatio, new GuiSlider.FormatHelper() {
@@ -186,7 +196,8 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
             @Override
             public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {}
             @Override
-            public void onTick(int id, float value) {CfgBasic.basicKeyNoteAspectRatio = value;syncHud();}
+            public void onTick(int id, float value) {CfgBasic.basicKeyNoteAspectRatio = value;
+                syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
         }, 100, x, y + 275, "cfg.basic.key_note_aspect_ratio", 1.0f, 10.0f, (float) CfgBasic.basicKeyNoteAspectRatio, new GuiSlider.FormatHelper() {
@@ -199,7 +210,8 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
             @Override
             public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {}
             @Override
-            public void onTick(int id, float value) {CfgBasic.basicStripWidthRatio = value;syncHud();}
+            public void onTick(int id, float value) {CfgBasic.basicStripWidthRatio = value;
+                syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
         }, 100, x, y + 300, "cfg.basic.strip_width_ratio", 0.1f, 1.0f, (float) CfgBasic.basicStripWidthRatio, new GuiSlider.FormatHelper() {
@@ -212,7 +224,8 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
             @Override
             public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {}
             @Override
-            public void onTick(int id, float value) {CfgBasic.basicNoteBorderSize = (int) value;syncHud();}
+            public void onTick(int id, float value) {CfgBasic.basicNoteBorderSize = (int) value;
+                syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
         }, 100, x, y + 325, "cfg.basic.note_border_size", 0.0f, 10.0f, CfgBasic.basicNoteBorderSize, new GuiSlider.FormatHelper() {
@@ -243,7 +256,7 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
             sldKeyNoteAspectRatio.func_175218_a(5.0f, true);
             sldStripWidthRatio.func_175218_a(0.5f, true);
             sldNoteBorderSize.func_175218_a(2, true);
-            syncHud();
+            syncHudWhenInGuiHudMenu();
         }else if (button.id == 1) {
             toggleRightPos = !toggleRightPos;
             x = toggleRightPos ? width - screenWidth - 5 : 5;
@@ -275,7 +288,7 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
         super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
-    private void syncHud() {
+    private void syncHudWhenInGuiHudMenu() {
         if (Chart.selectedChart != null) {
             TickHandler.noteHandler.onRestartChart();
         }

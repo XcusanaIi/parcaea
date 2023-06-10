@@ -38,6 +38,8 @@ public class TickHandler {
 
     private static boolean autoRightClicked = false;
 
+    public static boolean enAutoClearPB = true;
+
     @SubscribeEvent
     public void onClientTick(ClientTickEvent event) {
         if (mc.thePlayer == null || mc.theWorld == null || !CfgGeneral.enableMod) return;
@@ -69,6 +71,9 @@ public class TickHandler {
             if (KeyBinds.keyRestartChart.isKeyDown() && CfgGeneral.enableAutoPos && mc.currentScreen == null && !autoRightClicked) {
                 autoRightClicked = true;
                 KeyBinding.setKeyBindState(mc.gameSettings.keyBindUseItem.getKeyCode(), true);
+                if (enAutoClearPB && mc.thePlayer != null) {
+                    ClientCommandHandler.instance.executeCommand(mc.thePlayer, "/mpk clearpb");
+                }
             }
             if (KeyBinds.keyNewCoordStrategy.isPressed()) {
                 mc.displayGuiScreen(new GuiNewCoordStrategy());

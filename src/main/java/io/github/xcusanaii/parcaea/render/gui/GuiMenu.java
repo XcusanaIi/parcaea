@@ -1,16 +1,18 @@
 package io.github.xcusanaii.parcaea.render.gui;
 
 import io.github.xcusanaii.parcaea.Parcaea;
+import io.github.xcusanaii.parcaea.event.TickHandler;
 import io.github.xcusanaii.parcaea.event.handler.tick.NoteHandler;
 import io.github.xcusanaii.parcaea.event.handler.tick.RecordHandler;
 import io.github.xcusanaii.parcaea.io.JumpLoader;
 import io.github.xcusanaii.parcaea.model.Chart;
 import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
+import io.github.xcusanaii.parcaea.model.config.CfgBongoCapoo;
 import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
 import io.github.xcusanaii.parcaea.render.entity.BarrierMarker;
 import io.github.xcusanaii.parcaea.util.string.StringUtil;
-import io.github.xcusanaii.parcaea.util.widget.PGuiButton;
-import io.github.xcusanaii.parcaea.util.widget.PGuiTextField;
+import io.github.xcusanaii.parcaea.render.gui.widget.PGuiButton;
+import io.github.xcusanaii.parcaea.render.gui.widget.PGuiTextField;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.resources.I18n;
 import org.lwjgl.input.Mouse;
@@ -32,6 +34,8 @@ public class GuiMenu extends GuiScreen {
     private PGuiButton btnEnableLastUnstable;
     private PGuiButton btnToggleLockLastInput;
     private PGuiButton btnEnableSoundEffect;
+    private PGuiButton btnEnableBongoCapoo;
+    private PGuiButton btnEnableAutoClearPB;
     private PGuiButton[] lstItems;
     private List<String> idData;
     private List<String> displayData;
@@ -115,6 +119,16 @@ public class GuiMenu extends GuiScreen {
 
         buttonList.add(new PGuiButton(27, x + 402, y + 25, 8, 8, ""));
         buttonList.add(new PGuiButton(28, x + 402, y + 37, 8, 8, ""));
+
+        btnEnableBongoCapoo = new PGuiButton(29, x + 310, y + 75, 100, 20, I18n.format("txt.enable_bongo_capoo"));
+        btnEnableBongoCapoo.packedFGColour = CfgBongoCapoo.enableBongoCapoo ? ColorGeneral.BTN_ENABLE : ColorGeneral.BTN_DISABLE;
+        buttonList.add(btnEnableBongoCapoo);
+
+        buttonList.add(new PGuiButton(30, x + 310, y + 100, 100, 20, I18n.format("txt.bongo_capoo_config")));
+
+        btnEnableAutoClearPB = new PGuiButton(31, x + 310, y + 125, 100, 20, I18n.format("txt.enable_auto_clear_pb"));
+        btnEnableAutoClearPB.packedFGColour = TickHandler.enAutoClearPB ? ColorGeneral.BTN_ENABLE : ColorGeneral.BTN_DISABLE;
+        buttonList.add(btnEnableAutoClearPB);
 
         for (int i = 0; i < 10; i++) {
             lstItems[i] = new PGuiButton(i, x, y + 25 * (i + 1), 200, 20, I18n.format("txt.key_none"));
@@ -260,6 +274,14 @@ public class GuiMenu extends GuiScreen {
                 CfgGeneral.barrierDistance--;
             }
             txtBarrierDistance.setText(String.valueOf(CfgGeneral.barrierDistance));
+        }else if (button.id == 29) {
+            CfgBongoCapoo.enableBongoCapoo = !CfgBongoCapoo.enableBongoCapoo;
+            btnEnableBongoCapoo.packedFGColour = CfgBongoCapoo.enableBongoCapoo ? ColorGeneral.BTN_ENABLE : ColorGeneral.BTN_DISABLE;
+        }else if (button.id == 30) {
+            mc.displayGuiScreen(new GuiBongoCapooConfig());
+        }else if (button.id == 31) {
+            TickHandler.enAutoClearPB = !TickHandler.enAutoClearPB;
+            btnEnableAutoClearPB.packedFGColour = TickHandler.enAutoClearPB ? ColorGeneral.BTN_ENABLE : ColorGeneral.BTN_DISABLE;
         }
     }
 

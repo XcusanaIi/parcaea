@@ -34,6 +34,11 @@ public class ConfigLoader {
         CfgBasic.basicKeyNoteAspectRatio = config.get("hud.basic", "basicKeyNoteAspectRatio", 5.0).getDouble();
         CfgBasic.basicStripWidthRatio = config.get("hud.basic", "basicStripWidthRatio", 0.5).getDouble();
         CfgBasic.basicNoteBorderSize = config.get("hud.basic", "basicNoteBorderSize", 2).getInt();
+
+        CfgBongoCapoo.enableBongoCapoo = config.get("bongo_capoo", "enableBongoCapoo", true).getBoolean();
+        CfgBongoCapoo.x = config.get("bongo_capoo", "x", 5).getInt();
+        CfgBongoCapoo.y = config.get("bongo_capoo", "y", 5).getInt();
+        CfgBongoCapoo.scale = config.get("bongo_capoo", "scale", 1.0D).getDouble();
     }
 
     public static void saveConfig() {
@@ -66,6 +71,11 @@ public class ConfigLoader {
         config.get("hud.basic", "basicKeyNoteAspectRatio", 5.0).set(CfgBasic.basicKeyNoteAspectRatio);
         config.get("hud.basic", "basicStripWidthRatio", 0.5).set(CfgBasic.basicStripWidthRatio);
         config.get("hud.basic", "basicNoteBorderSize", 2).set(CfgBasic.basicNoteBorderSize);
+
+        config.get("bongo_capoo", "enableBongoCapoo", true).set(CfgBongoCapoo.enableBongoCapoo);
+        config.get("bongo_capoo", "x", 5).set(CfgBongoCapoo.x);
+        config.get("bongo_capoo", "y", 5).set(CfgBongoCapoo.y);
+        config.get("bongo_capoo", "scale", 1.0D).set(CfgBongoCapoo.scale);
 
         config.save();
     }

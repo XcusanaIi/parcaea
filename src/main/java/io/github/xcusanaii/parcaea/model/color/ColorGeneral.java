@@ -29,4 +29,5 @@ public class ColorGeneral {
     public static int BG_UNSTABLE = 0x88F08080;
     public static int BUTTON_COLOR = 0x88000000;
     public static int BUTTON_COLOR_HOVER = 0x88444444;
+    public static int SLIDER_BUTTON = 0x88FFFFFF;
 }
