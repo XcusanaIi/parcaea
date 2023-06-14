@@ -13,19 +13,6 @@ public class Chart {
     public static List<Chart> charts = new ArrayList<Chart>();
     public static Chart selectedChart = null;
 
-    public final String id;
-    public final List<List<KeyNote>> keyTicks;
-    public final List<MouseNote> mouseTicks;
-    public double yawRange;
-    public boolean isNoTurn;
-
-    public Chart(Jump jump) {
-        this.id = jump.id;
-        this.keyTicks = toKeyNote(jump);
-        this.mouseTicks = toMouseNote(jump);
-        checkCanIgnoreDisplay();
-    }
-
     public static Chart searchChart(String id) {
         for (Chart chart : charts) {
             if (chart.id.equals(id)) {
@@ -50,6 +37,52 @@ public class Chart {
                 System.out.print(chart.keyTicks.get(i));
                 System.out.println(" " + chart.mouseTicks.get(i));
             }
+        }
+    }
+
+    private static int mapKeySlotInMirror(int keySlot) {
+        if (keySlot == 1) return 3;
+        else if (keySlot == 3) return 1;
+        else return keySlot;
+    }
+
+    private static void mirrorKeyNote(KeyNote keyNote) {
+        if (keyNote instanceof KeyNoteHead) {
+            KeyNoteHead keyNoteHead = (KeyNoteHead) keyNote;
+            keyNoteHead.keySlot = mapKeySlotInMirror(keyNoteHead.keySlot);
+        } else if (keyNote instanceof KeyNoteBody) {
+            KeyNoteBody keyNoteBody = (KeyNoteBody) keyNote;
+            keyNoteBody.keySlot = mapKeySlotInMirror(keyNoteBody.keySlot);
+        }
+    }
+
+    public final String id;
+    public final List<List<KeyNote>> keyTicks;
+    public final List<MouseNote> mouseTicks;
+    public double yawRange;
+    public boolean isNoTurn;
+    public boolean isMirrored = false;
+
+    public Chart(Jump jump) {
+        id = jump.id;
+        keyTicks = toKeyNote(jump);
+        mouseTicks = toMouseNote(jump);
+        checkCanIgnoreDisplay();
+    }
+
+    public void mirror() {
+        isMirrored = !isMirrored;
+        for (List<KeyNote> keyTick : keyTicks) {
+            KeyNote temp = keyTick.get(1);
+            keyTick.set(1, keyTick.get(3));
+            keyTick.set(3, temp);
+            for (KeyNote keyNote : keyTick) {
+                mirrorKeyNote(keyNote);
+            }
+        }
+        for (MouseNote mouseTick : mouseTicks) {
+            mouseTick.dYaw *= -1;
+            mouseTick.posPercent = 1.0D - mouseTick.posPercent;
         }
     }
 

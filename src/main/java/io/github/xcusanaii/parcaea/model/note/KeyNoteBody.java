@@ -2,7 +2,7 @@ package io.github.xcusanaii.parcaea.model.note;
 
 public class KeyNoteBody extends KeyNote{
 
-    public final int keySlot;
+    public int keySlot;
     public int life;
 
     public KeyNoteBody(int keySlot, int life) {

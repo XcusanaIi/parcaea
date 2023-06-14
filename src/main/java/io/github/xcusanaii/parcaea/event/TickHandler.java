@@ -6,7 +6,6 @@ import io.github.xcusanaii.parcaea.event.handler.tick.*;
 import io.github.xcusanaii.parcaea.model.KeyBinds;
 import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
 import io.github.xcusanaii.parcaea.model.input.InputStat;
-import io.github.xcusanaii.parcaea.model.segment.CoordStrategy;
 import io.github.xcusanaii.parcaea.model.segment.Segment;
 import io.github.xcusanaii.parcaea.render.entity.CoordMarker;
 import io.github.xcusanaii.parcaea.render.gui.GuiMenu;

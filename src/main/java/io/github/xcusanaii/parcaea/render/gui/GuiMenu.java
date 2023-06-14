@@ -36,6 +36,7 @@ public class GuiMenu extends GuiScreen {
     private PGuiButton btnEnableSoundEffect;
     private PGuiButton btnEnableBongoCapoo;
     private PGuiButton btnEnableAutoClearPB;
+    private PGuiButton btnMirrorChart;
     private PGuiButton[] lstItems;
     private List<String> idData;
     private List<String> displayData;
@@ -129,6 +130,10 @@ public class GuiMenu extends GuiScreen {
         btnEnableAutoClearPB = new PGuiButton(31, x + 310, y + 125, 100, 20, I18n.format("txt.enable_auto_clear_pb"));
         btnEnableAutoClearPB.packedFGColour = TickHandler.enAutoClearPB ? ColorGeneral.BTN_ENABLE : ColorGeneral.BTN_DISABLE;
         buttonList.add(btnEnableAutoClearPB);
+
+        btnMirrorChart = new PGuiButton(32, x + 310, y + 225, 100, 20, I18n.format("txt.enable_mirror_chart"));
+        btnMirrorChart.packedFGColour = (Chart.selectedChart != null && Chart.selectedChart.isMirrored) ? ColorGeneral.BTN_ENABLE : ColorGeneral.BTN_DISABLE;
+        buttonList.add(btnMirrorChart);
 
         for (int i = 0; i < 10; i++) {
             lstItems[i] = new PGuiButton(i, x, y + 25 * (i + 1), 200, 20, I18n.format("txt.key_none"));
@@ -282,6 +287,9 @@ public class GuiMenu extends GuiScreen {
         }else if (button.id == 31) {
             TickHandler.enAutoClearPB = !TickHandler.enAutoClearPB;
             btnEnableAutoClearPB.packedFGColour = TickHandler.enAutoClearPB ? ColorGeneral.BTN_ENABLE : ColorGeneral.BTN_DISABLE;
+        }else if (button.id == 32 && Chart.selectedChart != null) {
+            Chart.selectedChart.mirror();
+            btnMirrorChart.packedFGColour = Chart.selectedChart.isMirrored ? ColorGeneral.BTN_ENABLE : ColorGeneral.BTN_DISABLE;
         }
     }
 
