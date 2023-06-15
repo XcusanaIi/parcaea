@@ -7,6 +7,7 @@ import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
 import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
 import io.github.xcusanaii.parcaea.model.input.InputStat;
 import io.github.xcusanaii.parcaea.model.input.InputTick;
+import io.github.xcusanaii.parcaea.model.input.UnstableMouseNote;
 import io.github.xcusanaii.parcaea.model.note.KeyNote;
 import io.github.xcusanaii.parcaea.model.note.KeyNoteHead;
 import io.github.xcusanaii.parcaea.model.note.MouseNote;
@@ -29,13 +30,14 @@ public class BasicNoteHandler extends NoteHandler {
             for (BasicHud.LastInputDisplay lastInput : BasicHud.lastInputDisplays) {
                 lastInput.y += Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed;
             }
-            if (BasicHud.lastUnstableMouseNote != null) {
-                BasicHud.lastUnstableMouseNote.y += Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed;
+            for (BasicHud.UnstableMouseNoteDisplay mouseNote : BasicHud.unstableMouseNoteDisplays) {
+                mouseNote.y += Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed;
             }
         }else {
             BasicHud.lastInputDisplays.clear();
             BasicHud.keyNoteDisplays.clear();
             BasicHud.mouseNoteDisplays.clear();
+            BasicHud.unstableMouseNoteDisplays.clear();
         }
     }
 
@@ -71,25 +73,30 @@ public class BasicNoteHandler extends NoteHandler {
         }
 
         BasicHud.mouseNoteDisplays.clear();
+        BasicHud.unstableMouseNoteDisplays.clear();
+
         if (!CfgGeneral.enableSnake || Chart.selectedChart.isNoTurn) return;
+
         List<MouseNote> mouseTicks = Chart.selectedChart.mouseTicks;
         for (int i = 0; i < mouseTicks.size(); i++) {
             MouseNote mouseNote = mouseTicks.get(i);
             if (!mouseNote.canIgnoreDisplay) {
                 BasicHud.mouseNoteDisplays.add(new BasicHud.MouseNoteDisplay(
                         mouseNote.posPercent,
-                        mouseNote.is45 ? ColorGeneral.BLUE : ColorGeneral.YELLOW, BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * i
+                        mouseNote.is45 ? ColorGeneral.BLUE : ColorGeneral.YELLOW,
+                        BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * i
                 ));
             }
         }
 
-        if (lastUnstableMouseIndex >= 0 && lastUnstableMouseIndex < mouseTicks.size()) {
-            BasicHud.lastUnstableMouseNote = new BasicHud.MouseNoteDisplay(
-                    mouseTicks.get(lastUnstableMouseIndex).posPercent,
-                    ColorGeneral.BG_UNSTABLE, BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * lastUnstableMouseIndex
-            );
-        }else {
-            BasicHud.lastUnstableMouseNote = null;
+        for (UnstableMouseNote lastUnstableMouse : InputStat.lastUnstableMouses) {
+            int i = lastUnstableMouse.index;
+            if (i < 0 || i >= mouseTicks.size()) continue;
+            BasicHud.unstableMouseNoteDisplays.add(new BasicHud.UnstableMouseNoteDisplay(
+                    mouseTicks.get(i).posPercent,
+                    BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * lastUnstableMouse.index,
+                    lastUnstableMouse.type
+            ));
         }
     }
 

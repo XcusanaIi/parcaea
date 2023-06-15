@@ -112,7 +112,7 @@ public abstract class AbsHud extends GuiIngame {
         drawPolygon(vs, color);
     }
 
-    private void drawPolygon(Vec2i[] vs, int color) {
+    protected void drawPolygon(Vec2i[] vs, int color) {
         float r = (float)(color >> 16 & 255) / 255.0f;
         float g = (float)(color >> 8 & 255) / 255.0f;
         float b = (float)(color & 255) / 255.0f;

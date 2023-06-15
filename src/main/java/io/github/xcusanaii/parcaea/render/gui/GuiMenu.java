@@ -214,19 +214,19 @@ public class GuiMenu extends GuiScreen {
             CfgGeneral.noteSpeed = Double.parseDouble(str);
             txtNoteSpeed.setText(String.valueOf(CfgGeneral.noteSpeed));
         }else if (button.id == 13) {
-            if (CfgGeneral.toleranceFactor + 0.01 <= 1.0) {
-                CfgGeneral.toleranceFactor += 0.01;
+            if (CfgGeneral.toleranceFactor + 0.01D <= 45.0D) {
+                CfgGeneral.toleranceFactor += 0.01D;
             }else {
-                CfgGeneral.toleranceFactor = 1.0;
+                CfgGeneral.toleranceFactor = 45.0D;
             }
             String str = Parcaea.DF_2.format(CfgGeneral.toleranceFactor);
             CfgGeneral.toleranceFactor = Double.parseDouble(str);
             txtToleranceFactor.setText(String.valueOf(CfgGeneral.toleranceFactor));
         }else if (button.id == 14) {
-            if (CfgGeneral.toleranceFactor - 0.01 >= 0.01) {
-                CfgGeneral.toleranceFactor -= 0.01;
+            if (CfgGeneral.toleranceFactor - 0.01D >= 0.01D) {
+                CfgGeneral.toleranceFactor -= 0.01D;
             }else {
-                CfgGeneral.toleranceFactor = 0.01;
+                CfgGeneral.toleranceFactor = 0.01D;
             }
             String str = Parcaea.DF_2.format(CfgGeneral.toleranceFactor);
             CfgGeneral.toleranceFactor = Double.parseDouble(str);
@@ -336,7 +336,7 @@ public class GuiMenu extends GuiScreen {
             String str = txtToleranceFactor.getText();
             if (StringUtil.isDouble(str)) {
                 double toleranceFactor = Double.parseDouble(str);
-                if (toleranceFactor >= 0.01 && toleranceFactor <= 1.0) {
+                if (toleranceFactor >= 0.01D && toleranceFactor <= 45.0D) {
                     CfgGeneral.toleranceFactor = toleranceFactor;
                 }
             }

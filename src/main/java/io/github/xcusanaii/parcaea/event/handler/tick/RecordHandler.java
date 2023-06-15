@@ -16,13 +16,9 @@ public class RecordHandler {
     private static boolean isWaitingInput = false;
     private static int tickI = 0;
 
-    private static double oldYaw = 0.0;
-    private static double newYaw = 0.0;
-
     private static final Minecraft mc = Minecraft.getMinecraft();
 
     public void onClientTickPre() {
-        syncInputStatDYaw();
         InfoHud.infoDisplayList.add(new InfoHud.InfoDisplay(
                 new Vec2d(0.1, 0.1),
                 String.valueOf(tickI),
@@ -44,26 +40,6 @@ public class RecordHandler {
             InputStat.addLastInput();
             tickI++;
         }
-    }
-
-    private static void syncInputStatDYaw() {
-        double yaw = mc.thePlayer.rotationYaw;
-        yaw %= 360.0;
-        if (yaw < 0) yaw += 360.0;
-        oldYaw = newYaw;
-        newYaw = yaw;
-        double dYaw;
-        if (Math.abs(oldYaw - newYaw) > 180.0) {
-            if (oldYaw < newYaw) {
-                dYaw = newYaw - (oldYaw + 360.0);
-            }
-            else {
-                dYaw = newYaw + 360.0 - oldYaw;
-            }
-        }else {
-            dYaw = newYaw - oldYaw;
-        }
-        InputStat.isKeyDown.dYaw = dYaw;
     }
 
     public static void onStartRecord() {

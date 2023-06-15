@@ -8,6 +8,7 @@ import io.github.xcusanaii.parcaea.model.input.InputStat;
 import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
 import io.github.xcusanaii.parcaea.model.config.CfgBasic;
 import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
+import io.github.xcusanaii.parcaea.model.input.UnstableMouseNote;
 import io.github.xcusanaii.parcaea.render.AbsHud;
 import io.github.xcusanaii.parcaea.util.math.Vec2i;
 import java.math.BigInteger;
@@ -23,8 +24,9 @@ public class BasicHud extends AbsHud {
     public static List<KeyNoteDisplay> keyNoteDisplays = new ArrayList<KeyNoteDisplay>();
     public static List<MouseNoteDisplay> mouseNoteDisplays = new ArrayList<MouseNoteDisplay>();
     public static List<LastInputDisplay> lastInputDisplays = new ArrayList<LastInputDisplay>();
-    public static MouseNoteDisplay lastUnstableMouseNote = null;
+    public static List<UnstableMouseNoteDisplay> unstableMouseNoteDisplays = new ArrayList<UnstableMouseNoteDisplay>();
     public static int keyNoteWidth = 0;
+
     public int keyNoteHeight = 0;
     public int stripWidth = 0;
     public int indicatorSize = 0;
@@ -211,7 +213,6 @@ public class BasicHud extends AbsHud {
 
     @Override
     public void drawMouseNote(float partialTicks) {
-        drawLastUnstableMouseNote(partialTicks);
         for (int i = 0; i < mouseNoteDisplays.size(); i++) {
             MouseNoteDisplay mouseNote = mouseNoteDisplays.get(i);
             double y = mouseNote.y + Parcaea.PX_PER_TICK * partialTicks * CfgGeneral.noteSpeed;
@@ -241,6 +242,9 @@ public class BasicHud extends AbsHud {
                     ColorGeneral.BORDER_BLACK
             );
         }
+
+        drawLastUnstableMouseNote(partialTicks);
+
         int indicatorX = (int) (mouseTrackLeft + mouseTrackWidth * InputStat.mousePosPercent);
         indicatorX = Math.max(indicatorX, leftTop.x);
         indicatorX = Math.min(indicatorX, rightBottom.x);
@@ -255,17 +259,27 @@ public class BasicHud extends AbsHud {
     }
 
     private void drawLastUnstableMouseNote(float partialTicks) {
-        if (lastUnstableMouseNote == null || !CfgGeneral.enableLastInput) return;
-        int y = (int) (lastUnstableMouseNote.y + Parcaea.PX_PER_TICK * partialTicks * CfgGeneral.noteSpeed);
-        if (y < leftTop.y || y > jLineCenter.y) return;
-        Vec2i center = new Vec2i((int) (mouseTrackLeft + mouseTrackWidth * lastUnstableMouseNote.posPercent), y);
-        drawRect(
-                (int) (center.x - indicatorSize / 1.5),
-                (int) (center.y - indicatorSize / 1.5),
-                (int) (center.x + indicatorSize / 1.5),
-                (int) (center.y + indicatorSize / 1.5),
-                ColorGeneral.BG_UNSTABLE
-        );
+        if (!CfgGeneral.enableLastInput) return;
+        for (UnstableMouseNoteDisplay note : unstableMouseNoteDisplays) {
+            double y = note.y + Parcaea.PX_PER_TICK * partialTicks * CfgGeneral.noteSpeed;
+            if (y < leftTop.y || y > jLineCenter.y + Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed) continue;
+            y = y > jLineCenter.y ? jLineCenter.y : y;
+            int x = (int) (mouseTrackLeft + mouseTrackWidth * note.posPercent);
+            if (note.type == UnstableMouseNote.Type.BOTH || note.type == UnstableMouseNote.Type.LEFT) {
+                drawPolygon(new Vec2i[]{
+                        new Vec2i((int) (x), (int) (y + mouseNoteSize / 3.0D) + 1),
+                        new Vec2i((int) (x), (int) (y - mouseNoteSize / 3.0D)),
+                        new Vec2i((int) (x - mouseNoteSize / 3.0D), (int) y)
+                }, ColorGeneral.BG_UNSTABLE);
+            }
+            if (note.type == UnstableMouseNote.Type.BOTH || note.type == UnstableMouseNote.Type.RIGHT) {
+                drawPolygon(new Vec2i[]{
+                        new Vec2i((int) (x), (int) (y + mouseNoteSize / 3.0D) + 1),
+                        new Vec2i((int) (x + mouseNoteSize / 3.0D) + 1, (int) y),
+                        new Vec2i((int) (x), (int) (y - mouseNoteSize / 3.0D))
+                }, ColorGeneral.BG_UNSTABLE);
+            }
+        }
     }
 
     @Override
@@ -308,6 +322,18 @@ public class BasicHud extends AbsHud {
             this.posPercent = posPercent;
             this.color = color;
             this.y = y;
+        }
+    }
+
+    public static class UnstableMouseNoteDisplay {
+        public final double posPercent;
+        public double y;
+        public UnstableMouseNote.Type type;
+
+        public UnstableMouseNoteDisplay(double posPercent, double y, UnstableMouseNote.Type type) {
+            this.posPercent = posPercent;
+            this.y = y;
+            this.type = type;
         }
     }
 

@@ -58,6 +58,7 @@ public class TickHandler {
         }else {
             syncKeyInputStatOnClientTickPre();
             advInputHandler.onClientTickPre();
+            NoteHandler.syncInputStatDYaw();
             if (RecordHandler.isInRecord) {
                 recordHandler.onClientTickPre();
             }else {

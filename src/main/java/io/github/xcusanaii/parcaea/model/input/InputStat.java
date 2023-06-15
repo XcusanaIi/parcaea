@@ -11,6 +11,7 @@ public class InputStat {
     public static List<InputTick> lastInput = new ArrayList<InputTick>();
     public static InputTick isKeyDown = new InputTick();
     public static InputTick isKeyDownExact = new InputTick();
+    public static List<UnstableMouseNote> lastUnstableMouses = new ArrayList<UnstableMouseNote>();
     public static long[] keyExactPressTime = new long[7];
     public static int lastKeyDownExactLeft = -1;
     public static int lastKeyDownExactRight = -1;

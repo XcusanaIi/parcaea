@@ -28,7 +28,6 @@ public class JumpLoader {
                         String line;
                         ArrayList<ArrayList<Number>> ticks = new ArrayList<ArrayList<Number>>();
                         while ((line = reader.readLine()) != null) {
-                            System.out.println(line);
                             Scanner scanner = new Scanner(line);
                             int times = 1;
                             if (scanner.hasNext()) {
@@ -51,7 +50,17 @@ public class JumpLoader {
                                     tick.add(Double.parseDouble(str));
                                 }
                             }
-                            if(tick.size() == 8) {
+                            if (scanner.hasNext()){
+                                String str = scanner.next();
+                                if(StringUtil.isDouble(str)) {
+                                    tick.add(Double.parseDouble(str));
+                                }else {
+                                    tick.add(-1.0D);
+                                }
+                            }else {
+                                tick.add(-1.0D);
+                            }
+                            if(tick.size() == 9) {
                                 for (int i = 0; i < times; i++) {
                                     ticks.add(tick);
                                 }

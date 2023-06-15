@@ -146,7 +146,7 @@ public class Chart {
         isNoTurn = yawRange == 0.0;
         for (int i = 0; i < jump.ticks.size(); i++) {
             boolean is45 = Math.abs((Double)jump.ticks.get(i).get(7)) == 45.0;
-            MouseNote mouseNote = new MouseNote((posRecord.get(i) - minYaw) / yawRange, i, is45, (Double) jump.ticks.get(i).get(7));
+            MouseNote mouseNote = new MouseNote((posRecord.get(i) - minYaw) / yawRange, i, is45, (Double) jump.ticks.get(i).get(7), (Double) jump.ticks.get(i).get(8));
             ticks.add(mouseNote);
         }
         return ticks;
