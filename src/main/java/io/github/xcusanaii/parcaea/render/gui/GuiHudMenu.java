@@ -43,7 +43,7 @@ public class GuiHudMenu extends GuiScreen {
         super.mouseClicked(mouseX, mouseY, mouseButton);
         int p = Parcaea.CLOSE_SAFE_PADDING;
         if (mouseX < x - p || mouseX > x + screenWidth + p || mouseY < y - p || mouseY > y + screenHeight + p) {
-            mc.displayGuiScreen(new GuiMenu());
+            mc.displayGuiScreen(null);
         }
     }
 

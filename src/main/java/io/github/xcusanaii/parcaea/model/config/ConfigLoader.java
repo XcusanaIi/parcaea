@@ -1,16 +1,16 @@
 package io.github.xcusanaii.parcaea.model.config;
 
 import io.github.xcusanaii.parcaea.Parcaea;
+import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
 import net.minecraftforge.common.config.Configuration;
 
 public class ConfigLoader {
     public static void loadConfig() {
         Configuration config = Parcaea.config;
 
-        CfgGeneral.enableMod = config.get("general", "enableMod", true).getBoolean();
         CfgGeneral.enableParcaea = config.get("general", "enableParcaea", true).getBoolean();
+        CfgGeneral.enableChart = config.get("general", "enableChart", true).getBoolean();
         CfgGeneral.enableSnake = config.get("general", "enableSnake", true).getBoolean();
-        CfgGeneral.enable45S = config.get("general", "enable45S", true).getBoolean();
         CfgGeneral.noteSpeed = config.get("general", "noteSpeed", 1.0).getDouble();
         CfgGeneral.enableAutoPos = config.get("general", "enableAutoPos", false).getBoolean();
         CfgGeneral.toleranceFactor = config.get("general", "toleranceFactor", 0.1).getDouble();
@@ -21,6 +21,7 @@ public class ConfigLoader {
         CfgGeneral.enableSegment = config.get("general", "enableSegment", false).getBoolean();
         CfgGeneral.segmentViewDistance = config.get("general", "segmentViewDistance", 16).getInt();
         CfgGeneral.barrierDistance = config.get("general", "barrierDistance", 16).getInt();
+        CfgGeneral.themeColor = config.get("general", "themeColor", ColorGeneral.AQUA).getInt();
 
         CfgBasic.basicHudWidth = config.get("hud.basic", "basicHudWidth", 400).getInt();
         CfgBasic.basicHudHeight = config.get("hud.basic", "basicHudHeight", 300).getInt();
@@ -36,18 +37,17 @@ public class ConfigLoader {
         CfgBasic.basicNoteBorderSize = config.get("hud.basic", "basicNoteBorderSize", 2).getInt();
 
         CfgBongoCapoo.enableBongoCapoo = config.get("bongo_capoo", "enableBongoCapoo", true).getBoolean();
-        CfgBongoCapoo.x = config.get("bongo_capoo", "x", 5).getInt();
-        CfgBongoCapoo.y = config.get("bongo_capoo", "y", 5).getInt();
+        CfgBongoCapoo.xPercent = config.get("bongo_capoo", "xPercent", 0.1D).getDouble();
+        CfgBongoCapoo.yPercent = config.get("bongo_capoo", "yPercent", 0.1D).getDouble();
         CfgBongoCapoo.scale = config.get("bongo_capoo", "scale", 1.0D).getDouble();
     }
 
     public static void saveConfig() {
         Configuration config = Parcaea.config;
 
-        config.get("general", "enableMod", true).set(CfgGeneral.enableMod);
         config.get("general", "enableParcaea", true).set(CfgGeneral.enableParcaea);
+        config.get("general", "enableChart", true).set(CfgGeneral.enableChart);
         config.get("general", "enableSnake", true).set(CfgGeneral.enableSnake);
-        config.get("general", "enable45S", true).set(CfgGeneral.enable45S);
         config.get("general", "noteSpeed", 1.0).set(CfgGeneral.noteSpeed);
         config.get("general", "enableAutoPos", false).set(CfgGeneral.enableAutoPos);
         config.get("general", "toleranceFactor", 0.1).set(CfgGeneral.toleranceFactor);
@@ -58,6 +58,7 @@ public class ConfigLoader {
         config.get("general", "enableSegment", false).set(CfgGeneral.enableSegment);
         config.get("general", "segmentViewDistance", 16).set(CfgGeneral.segmentViewDistance);
         config.get("general", "barrierDistance", 16).set(CfgGeneral.barrierDistance);
+        config.get("general", "themeColor", ColorGeneral.AQUA).set(CfgGeneral.themeColor);
 
         config.get("hud.basic", "basicHudWidth", 400).set(CfgBasic.basicHudWidth);
         config.get("hud.basic", "basicHudHeight", 300).set(CfgBasic.basicHudHeight);
@@ -73,8 +74,8 @@ public class ConfigLoader {
         config.get("hud.basic", "basicNoteBorderSize", 2).set(CfgBasic.basicNoteBorderSize);
 
         config.get("bongo_capoo", "enableBongoCapoo", true).set(CfgBongoCapoo.enableBongoCapoo);
-        config.get("bongo_capoo", "x", 5).set(CfgBongoCapoo.x);
-        config.get("bongo_capoo", "y", 5).set(CfgBongoCapoo.y);
+        config.get("bongo_capoo", "xPercent", 0.1D).set(CfgBongoCapoo.xPercent);
+        config.get("bongo_capoo", "yPercent", 0.1D).set(CfgBongoCapoo.yPercent);
         config.get("bongo_capoo", "scale", 1.0D).set(CfgBongoCapoo.scale);
 
         config.save();

@@ -3,6 +3,7 @@ package io.github.xcusanaii.parcaea.event.handler;
 import io.github.xcusanaii.parcaea.event.TickHandler;
 import io.github.xcusanaii.parcaea.model.KeyBinds;
 import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
+import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
 import io.github.xcusanaii.parcaea.render.InfoHud;
 import io.github.xcusanaii.parcaea.util.KeyMouse;
 import io.github.xcusanaii.parcaea.util.math.Vec2d;
@@ -47,11 +48,10 @@ public class AdvInputHandler {
             InfoHud.infoDisplayList.add(new InfoHud.InfoDisplay(
                     new Vec2d(0.5, 0.75),
                     I18n.format("txt.invert_sprint"),
-                    invertSprint ? ColorGeneral.AQUA : ColorGeneral.WHITE,
+                    invertSprint ? CfgGeneral.themeColor : ColorGeneral.WHITE,
                     20,
                     2.0f
-                    )
-            );
+            ));
         }
     }
 

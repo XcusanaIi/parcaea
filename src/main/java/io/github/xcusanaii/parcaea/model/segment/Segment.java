@@ -2,6 +2,7 @@ package io.github.xcusanaii.parcaea.model.segment;
 
 import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
 import io.github.xcusanaii.parcaea.render.entity.CoordMarker;
+import io.github.xcusanaii.parcaea.util.math.RotationUtil;
 import io.github.xcusanaii.parcaea.util.math.Vec3d;
 import net.minecraft.client.Minecraft;
 import java.util.ArrayList;
@@ -40,8 +41,9 @@ public class Segment {
         }
     }
 
-    public static void addCoordMarker(CoordStrategy coordStrategy) {
+    public static void addCoordStrategy() {
         if (selectedSegment == null || mc.thePlayer == null || mc.theWorld == null) return;
+        CoordStrategy coordStrategy = new CoordStrategy(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ, RotationUtil.mapDisplayYaw(mc.thePlayer.rotationYaw), "");
         selectedSegment.coords.add(coordStrategy);
         CoordMarker coordMarker = new CoordMarker(mc.theWorld, coordStrategy, ColorGeneral.BLUE);
         mc.theWorld.spawnEntityInWorld(coordMarker);
@@ -50,22 +52,17 @@ public class Segment {
 
     public static CoordMarker findNearestCoordMarker() {
         if (selectedSegment == null || mc.thePlayer == null || mc.theWorld == null) return null;
-        double distance = Double.MAX_VALUE;
-        for (CoordMarker coordMarker : CoordMarker.coordMarkers) {
-            double distanceI = Vec3d.distance(new Vec3d(coordMarker.posX, coordMarker.posY, coordMarker.posZ), new Vec3d(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ));
-            coordMarker.distance = distanceI;
-            if (distance > distanceI) {
-                distance = distanceI;
+        double minDistance = Double.MAX_VALUE;
+        int minIndex = -1;
+        for (int i = 0; i < CoordMarker.coordMarkers.size(); i++) {
+            CoordMarker coordMarker = CoordMarker.coordMarkers.get(i);
+            double distance = Vec3d.distance(new Vec3d(coordMarker.posX, coordMarker.posY, coordMarker.posZ), new Vec3d(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ));
+            if (distance < minDistance) {
+                minDistance = distance;
+                minIndex = i;
             }
         }
-        CoordMarker nearest = null;
-        for (CoordMarker coordMarker : CoordMarker.coordMarkers) {
-            if (coordMarker.distance == distance) {
-                nearest = coordMarker;
-                break;
-            }
-        }
-        return nearest;
+        return minIndex == -1 ? null : CoordMarker.coordMarkers.get(minIndex);
     }
 
     public static void removeNearestCoordMarker() {

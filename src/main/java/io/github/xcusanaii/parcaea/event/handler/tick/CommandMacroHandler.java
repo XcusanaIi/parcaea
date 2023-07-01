@@ -13,8 +13,8 @@ public class CommandMacroHandler {
 
     public static boolean toggleMsg = false;
 
-    public void onClientTickPre() {
-        if (KeyBinds.keyQuickCommandMacro.isPressed() && mc.thePlayer != null) {
+    public static void runCommandMacro() {
+        if (mc.thePlayer != null) {
             toggleMsg = !toggleMsg;
             String msg = toggleMsg ? msg1 : msg2;
             mc.thePlayer.sendChatMessage(msg);

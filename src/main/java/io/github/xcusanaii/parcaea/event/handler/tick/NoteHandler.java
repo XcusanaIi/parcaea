@@ -32,11 +32,9 @@ public abstract class NoteHandler {
     private static final Minecraft mc = Minecraft.getMinecraft();
 
     public void onClientTickPre() {
-        if (!CfgGeneral.enableParcaea) return;
+        if (!CfgGeneral.enableChart) return;
         if (KeyBinds.keyRestartChart.isPressed()) {
-            if (CfgGeneral.enable45S) {
-                init45S();
-            }else if (Chart.selectedChart != null){
+            if (Chart.selectedChart != null){
                 onRestartChart();
             }
         }
@@ -68,11 +66,6 @@ public abstract class NoteHandler {
             dYaw = newYaw - oldYaw;
         }
         isKeyDown.dYaw = dYaw;
-    }
-
-    private void init45S() {
-        yawRange = 180.0D;
-        mousePosPercent = 0.5D;
     }
 
     private void onStartPlay() {

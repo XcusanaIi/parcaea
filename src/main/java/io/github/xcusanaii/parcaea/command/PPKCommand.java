@@ -67,11 +67,11 @@ public class PPKCommand extends CommandBase implements ICommand {
                 player.addChatMessage(info);
             }
         }else if (args[0].equals("en")) {
-            CfgGeneral.enableMod = !CfgGeneral.enableMod;
+            CfgGeneral.enableParcaea = !CfgGeneral.enableParcaea;
             if (sender instanceof EntityPlayer) {
                 EntityPlayer player = (EntityPlayer) sender;
                 ChatComponentText info;
-                if (CfgGeneral.enableMod) {
+                if (CfgGeneral.enableParcaea) {
                     info = new ChatComponentText("Enable Parcaea");
                     info.setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN));
                 }else {

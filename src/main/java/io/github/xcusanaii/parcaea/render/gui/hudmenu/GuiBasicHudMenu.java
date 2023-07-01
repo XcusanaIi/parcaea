@@ -46,7 +46,7 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
                 syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
-        }, 100, x, y, "cfg.basic.offset_x", -800.0f, 800.0f, CfgGeneral.hudOffsetX, new GuiSlider.FormatHelper() {
+        }, 100, x, y, "cfg.basic.offset_x", -2000.0F, 2000.0F, CfgGeneral.hudOffsetX, new GuiSlider.FormatHelper() {
             @Override
             public String getText(int id, String name, float value) {return name + ": " + Parcaea.DF_0.format(value);}
         }, 150);
@@ -60,7 +60,7 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
                 syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
-        }, 100, x, y + 25, "cfg.basic.offset_y", -600.0f, 600.0f, CfgGeneral.hudOffsetY, new GuiSlider.FormatHelper() {
+        }, 100, x, y + 25, "cfg.basic.offset_y", -1500.0F, 1500.0F, CfgGeneral.hudOffsetY, new GuiSlider.FormatHelper() {
             @Override
             public String getText(int id, String name, float value) {return name + ": " + Parcaea.DF_0.format(value);}
         }, 150);
@@ -74,7 +74,7 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
                 syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
-        }, 100, x, y + 50, "cfg.basic.width", 200.0f, 800.0f, CfgBasic.basicHudWidth, new GuiSlider.FormatHelper() {
+        }, 100, x, y + 50, "cfg.basic.width", 200.0f, 2000.0F, CfgBasic.basicHudWidth, new GuiSlider.FormatHelper() {
             @Override
             public String getText(int id, String name, float value) {return name + ": " + Parcaea.DF_0.format(value);}
         }, 150);
@@ -88,7 +88,7 @@ public class GuiBasicHudMenu extends AGuiHudMenu {
                 syncHudWhenInGuiHudMenu();}
             @Override
             public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
-        }, 100, x, y + 75, "cfg.basic.height", 150.0f, 600.0f, CfgBasic.basicHudHeight, new GuiSlider.FormatHelper() {
+        }, 100, x, y + 75, "cfg.basic.height", 150.0f, 1500.0F, CfgBasic.basicHudHeight, new GuiSlider.FormatHelper() {
             @Override
             public String getText(int id, String name, float value) {return name + ": " + Parcaea.DF_0.format(value);}
         }, 150);

@@ -18,6 +18,7 @@ public class InputStat {
     public static InputTick isKeyDownPre = new InputTick();
     public static InputTick isKeyFired = new InputTick();
     public static double mousePosPercent = 0.5;
+    public static double mousePosPercentPre = 0.5;
     public static double yawRange = 180.0;
 
     public static void addLastInput() {

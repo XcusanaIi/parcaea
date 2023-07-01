@@ -8,12 +8,14 @@ public class InfoHandler {
 
     public void onClientTickPost() {
         for (InfoDisplay infoDisplay : InfoHud.infoDisplayList) {
-            infoDisplay.life--;
+            if (infoDisplay.life > 0) {
+                infoDisplay.life--;
+            }
         }
         InfoHud.infoDisplayList.removeIf(new Predicate<InfoDisplay>() {
             @Override
             public boolean test(InfoDisplay infoDisplay) {
-                return infoDisplay.life <= 0;
+                return infoDisplay.life == 0;
             }
         });
     }

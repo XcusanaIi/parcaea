@@ -24,24 +24,29 @@ public abstract class AbsHud extends GuiIngame {
 
     public void draw(float partialTicks){
         ScaledResolution resolution = new ScaledResolution(Minecraft.getMinecraft());
-        screenCenter.x = resolution.getScaledWidth() / 2 + CfgGeneral.hudOffsetX;
-        screenCenter.y = resolution.getScaledHeight() / 2 + CfgGeneral.hudOffsetY;
+
+        screenCenter.x = mc.displayWidth / 2 + CfgGeneral.hudOffsetX;
+        screenCenter.y = mc.displayHeight / 2 + CfgGeneral.hudOffsetY;
+
+        int guiScale = mc.gameSettings.guiScale == 0 ? 3 : mc.gameSettings.guiScale;
+
         calculateFramePos();
         if (!NoteHandler.isPlaying) partialTicks = 0.0F;
-        if (CfgGeneral.enable45S) {
-            draw45S();
-        }else {
-            drawFrame();
-            if (Chart.selectedChart != null) {
-                drawKeyNote(partialTicks);
-                if (CfgGeneral.enableSnake && !Chart.selectedChart.isNoTurn) {
-                    drawMouseNote(partialTicks);
-                }
+
+        GlStateManager.pushMatrix();
+        GlStateManager.scale(1.0F / guiScale, 1.0F / guiScale, 1.0F);
+
+        drawFrame();
+        if (Chart.selectedChart != null) {
+            drawKeyNote(partialTicks);
+            if (CfgGeneral.enableSnake && !Chart.selectedChart.isNoTurn) {
+                drawMouseNote(partialTicks);
             }
         }
+
+        GlStateManager.popMatrix();
     }
 
-    public abstract void draw45S();
     public abstract void calculateFramePos();
     public abstract void drawFrame();
     public abstract void drawKeyNote(float partialTicks);
@@ -86,9 +91,7 @@ public abstract class AbsHud extends GuiIngame {
         halfX = abs(halfX);
         halfY = abs(halfY);
         borderSize = abs(borderSize);
-        int smoothOffsetX = halfX > halfY ? 1 : 0;
-        int smoothOffsetY = halfY > halfX ? 1 : 0;
-        drawOrzmicStyleHexagon(center, halfX + borderSize + smoothOffsetX, halfY + borderSize + smoothOffsetY, borderColor);
+        drawOrzmicStyleHexagon(center, halfX + borderSize + 2, halfY + borderSize, borderColor);
         drawOrzmicStyleHexagon(center, halfX, halfY, noteColor);
     }
 

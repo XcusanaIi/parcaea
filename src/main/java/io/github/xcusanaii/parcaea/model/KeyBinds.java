@@ -16,7 +16,7 @@ public class KeyBinds {
 
     public static final KeyBinding keyTest = new KeyBinding("key.test", Keyboard.KEY_NONE, CATEGORY);
     public static final KeyBinding keyRestartChart = new KeyBinding("key.play_chart", Keyboard.KEY_R, CATEGORY);
-    public static final KeyBinding keyMenu = new KeyBinding("key.menu", Keyboard.KEY_Z, CATEGORY);
+    public static final KeyBinding keyIndex = new KeyBinding("key.index", Keyboard.KEY_Z, CATEGORY);
     public static final KeyBinding keyToggleInvertSprint = new KeyBinding("key.toggle_invert_sprint", Keyboard.KEY_NONE, CATEGORY);
     public static final KeyBinding keyInvertSprint = new KeyBinding("key.invert_sprint", Keyboard.KEY_NONE, CATEGORY);
     public static final KeyBinding keyIntenseSpaceLeft = new KeyBinding("key.intense_space_left", Keyboard.KEY_NONE, CATEGORY);
@@ -25,15 +25,12 @@ public class KeyBinds {
     public static final KeyBinding keyDoubleTapWD = new KeyBinding("key.double_tap_wd", Keyboard.KEY_NONE, CATEGORY);
     public static final KeyBinding keyDoubleTapSA = new KeyBinding("key.double_tap_sa", Keyboard.KEY_NONE, CATEGORY);
     public static final KeyBinding keyDoubleTapSD = new KeyBinding("key.double_tap_sd", Keyboard.KEY_NONE, CATEGORY);
-    public static final KeyBinding keyQuickCommandMacro = new KeyBinding("key.quick_command_macro", Keyboard.KEY_NONE, CATEGORY);
-    public static final KeyBinding keyNewCoordStrategy = new KeyBinding("key.new_coord_strategy", Keyboard.KEY_NONE, CATEGORY);
-    public static final KeyBinding keyDeleteCoordStrategy = new KeyBinding("key.delete_coord_strategy", Keyboard.KEY_NONE, CATEGORY);
     public static final KeyBinding keyAcscCoordStrategy = new KeyBinding("key.acsc_coord_strategy", Keyboard.KEY_NONE, CATEGORY);
 
     public static void registerKeyBinds() {
         ClientRegistry.registerKeyBinding(keyTest);
         ClientRegistry.registerKeyBinding(keyRestartChart);
-        ClientRegistry.registerKeyBinding(keyMenu);
+        ClientRegistry.registerKeyBinding(keyIndex);
         ClientRegistry.registerKeyBinding(keyToggleInvertSprint);
         ClientRegistry.registerKeyBinding(keyInvertSprint);
         ClientRegistry.registerKeyBinding(keyIntenseSpaceLeft);
@@ -42,9 +39,6 @@ public class KeyBinds {
         ClientRegistry.registerKeyBinding(keyDoubleTapWD);
         ClientRegistry.registerKeyBinding(keyDoubleTapSA);
         ClientRegistry.registerKeyBinding(keyDoubleTapSD);
-        ClientRegistry.registerKeyBinding(keyQuickCommandMacro);
-        ClientRegistry.registerKeyBinding(keyNewCoordStrategy);
-        ClientRegistry.registerKeyBinding(keyDeleteCoordStrategy);
         ClientRegistry.registerKeyBinding(keyAcscCoordStrategy);
     }
 }

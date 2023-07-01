@@ -8,8 +8,8 @@ import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
 import io.github.xcusanaii.parcaea.model.input.InputStat;
 import io.github.xcusanaii.parcaea.model.segment.Segment;
 import io.github.xcusanaii.parcaea.render.entity.CoordMarker;
-import io.github.xcusanaii.parcaea.render.gui.GuiMenu;
-import io.github.xcusanaii.parcaea.render.gui.GuiNewCoordStrategy;
+import io.github.xcusanaii.parcaea.render.gui.GuiIndex;
+import io.github.xcusanaii.parcaea.render.gui.GuiEditCoordStrategy;
 import io.github.xcusanaii.parcaea.util.KeyMouse;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -27,6 +27,7 @@ public class TickHandler {
     public static CommandMacroHandler commandMacroHandler = new CommandMacroHandler();
     public static RecordHandler recordHandler = new RecordHandler();
     public static AutoCoordHandler autoCoordHandler = new AutoCoordHandler();
+    public static LandingBlockHandler landingBlockHandler = new LandingBlockHandler();
 
     public static boolean advInputKeyBindJumpPressed = false;
     public static boolean advInputKeyBindForwardPressed = false;
@@ -41,7 +42,7 @@ public class TickHandler {
 
     @SubscribeEvent
     public void onClientTick(ClientTickEvent event) {
-        if (mc.thePlayer == null || mc.theWorld == null || !CfgGeneral.enableMod) return;
+        if (mc.thePlayer == null || mc.theWorld == null || !CfgGeneral.enableParcaea) return;
         if (event.phase == TickEvent.Phase.END) {
             advInputHandler.onClientTickPost();
             if (RecordHandler.isInRecord) {
@@ -54,6 +55,7 @@ public class TickHandler {
                 autoRightClicked = false;
             }
             infoHandler.onClientTickPost();
+            landingBlockHandler.onClientTickPost();
             syncKeyInputStatOnClientTickPost();
         }else {
             syncKeyInputStatOnClientTickPre();
@@ -64,9 +66,8 @@ public class TickHandler {
             }else {
                 noteHandler.onClientTickPre();
             }
-            commandMacroHandler.onClientTickPre();
-            if (KeyBinds.keyMenu.isPressed()) {
-                mc.displayGuiScreen(new GuiMenu());
+            if (KeyBinds.keyIndex.isPressed()) {
+                mc.displayGuiScreen(new GuiIndex());
             }
             if (KeyBinds.keyRestartChart.isKeyDown() && CfgGeneral.enableAutoPos && mc.currentScreen == null && !autoRightClicked) {
                 autoRightClicked = true;
@@ -74,12 +75,6 @@ public class TickHandler {
                 if (enAutoClearPB && mc.thePlayer != null) {
                     ClientCommandHandler.instance.executeCommand(mc.thePlayer, "/mpk clearpb");
                 }
-            }
-            if (KeyBinds.keyNewCoordStrategy.isPressed()) {
-                mc.displayGuiScreen(new GuiNewCoordStrategy());
-            }
-            if (KeyBinds.keyDeleteCoordStrategy.isPressed()) {
-                Segment.removeNearestCoordMarker();
             }
             if (KeyBinds.keyAcscCoordStrategy.isPressed()) {
                 CoordMarker nearestCoordMarker = Segment.findNearestCoordMarker();
@@ -89,6 +84,14 @@ public class TickHandler {
                 }
             }
             autoCoordHandler.onClientTickPre();
+
+//            InfoHud.infoDisplayList.add(new InfoHud.InfoDisplay(
+//                    new Vec2d(0.1D, 0.1D),
+//                    String.valueOf(mc.thePlayer.rotationYaw),
+//                    ColorGeneral.LABEL,
+//                    2,
+//                    1.0F
+//            ));
         }
     }
 

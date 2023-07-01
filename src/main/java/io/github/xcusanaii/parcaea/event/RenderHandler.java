@@ -26,13 +26,14 @@ public class RenderHandler {
 
     @SubscribeEvent
     public void onRenderGameOverlayEventPost(RenderGameOverlayEvent.Post event) {
-        if (!CfgGeneral.enableMod || event.type != RenderGameOverlayEvent.ElementType.EXPERIENCE) return;
+        if (!CfgGeneral.enableParcaea || event.type != RenderGameOverlayEvent.ElementType.EXPERIENCE) return;
         syncMouseInputStat();
         syncIsKeyDownExact();
         AdvInputHandler.onRenderGameOverlayEventPost();
-        if (CfgGeneral.enableParcaea && (mc.currentScreen == null || mc.currentScreen instanceof AGuiHudMenu)) hud.draw(event.partialTicks);
+        if (CfgGeneral.enableChart && (mc.currentScreen == null || mc.currentScreen instanceof AGuiHudMenu)) hud.draw(event.partialTicks);
         INFO_HUD.draw();
         BongoCapooHandler.onRenderGameOverlayEventPost(event.partialTicks);
+        InfoHud.debugInfo.info = String.valueOf(InputStat.mousePosPercentPre);
     }
 
     public static void setHud(AbsHud hud) {
@@ -85,6 +86,7 @@ public class RenderHandler {
     }
 
     private static void syncMouseInputStat() {
+        InputStat.mousePosPercentPre = InputStat.mousePosPercent;
         double yaw = mc.thePlayer.rotationYaw;
         yaw %= 360.0;
         if (yaw < 0) yaw += 360.0;

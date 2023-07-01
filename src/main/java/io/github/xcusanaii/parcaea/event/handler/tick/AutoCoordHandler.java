@@ -1,11 +1,9 @@
 package io.github.xcusanaii.parcaea.event.handler.tick;
 
-import io.github.xcusanaii.parcaea.Parcaea;
-import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
 import io.github.xcusanaii.parcaea.model.segment.CoordStrategy;
-import io.github.xcusanaii.parcaea.render.entity.CoordMarker;
 import io.github.xcusanaii.parcaea.util.math.RotationUtil;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +20,7 @@ public class AutoCoordHandler {
     private static final List<Entity> blockers = new ArrayList<Entity>();
     private static final Direction[] direction = new Direction[2];
     private static double playerPosY = 0.0;
-    private static final float anglePerTick = 15.0F;
+    private static final float anglePerTick = 5.0F;
     private static boolean isTurning = false;
 
     public void onClientTickPre() {
@@ -32,17 +30,19 @@ public class AutoCoordHandler {
             isTurning = false;
         }
         if (isTurning && coordStrategy != null) {
-            if (RotationUtil.deltaDegree(mc.thePlayer.rotationYaw, coordStrategy.f) < anglePerTick) {
-                mc.thePlayer.rotationYaw = (float) coordStrategy.f;
+            double deltaDegree = RotationUtil.deltaDegree(mc.thePlayer.rotationYaw, coordStrategy.f);
+            int rotateDir = RotationUtil.getRotationDir(mc.thePlayer.rotationYaw, coordStrategy.f);
+            if (deltaDegree < anglePerTick) {
+                mc.thePlayer.rotationYaw += rotateDir * deltaDegree;
                 isTurning = false;
             }else {
-                mc.thePlayer.rotationYaw += RotationUtil.rotateDir(mc.thePlayer.rotationYaw, coordStrategy.f) * anglePerTick;
+                mc.thePlayer.rotationYaw += rotateDir * anglePerTick;
             }
         }
     }
 
     public static void onStartAC() {
-        if (mc.thePlayer == null || coordStrategy == null) return;
+        if (mc.thePlayer == null || coordStrategy == null || mc.thePlayer.worldObj == null || isPlayerMoving(mc.thePlayer)) return;
         World world = mc.thePlayer.worldObj;
         if (mc.thePlayer.posX > coordStrategy.x) {
             direction[0] = Direction.W;
@@ -56,6 +56,11 @@ public class AutoCoordHandler {
         spawnBlocker(world, coordStrategy.x, coordStrategy.z, direction[1], mc.thePlayer);
         isTurning = true;
     }
+
+    private static boolean isPlayerMoving(EntityPlayerSP player) {
+        return !player.onGround || player.motionX != 0.0  || player.motionZ != 0.0;
+    }
+
     private static void spawnBlocker(World world, double x, double z, Direction direction, EntityPlayer player) {
         EntityBoat barrier = new EntityBoat(world);
         switch (direction) {

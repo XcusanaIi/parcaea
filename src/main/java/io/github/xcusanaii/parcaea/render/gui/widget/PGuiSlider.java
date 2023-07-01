@@ -94,7 +94,7 @@ public class PGuiSlider extends PGuiButton{
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             int left = this.xPosition + (int)(this.sliderPosition * (float)(this.width - 8));
             int top = this.yPosition;
-            drawRect(left, top, left + 4, top + 20, ColorGeneral.SLIDER_BUTTON);
+            drawRect(left, top, left + 8, top + 20, ColorGeneral.SLIDER_BUTTON);
         }
     }
 

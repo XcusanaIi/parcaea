@@ -13,7 +13,6 @@ public class CoordMarker extends Entity {
     public static List<CoordMarker> coordMarkers = new ArrayList<CoordMarker>();
 
     public CoordStrategy coordStrategy;
-    public double distance;
     public int color;
 
     public CoordMarker(World worldIn, CoordStrategy coordStrategy, int color) {
@@ -22,7 +21,6 @@ public class CoordMarker extends Entity {
         this.posX = this.coordStrategy.x;
         this.posY = this.coordStrategy.y;
         this.posZ = this.coordStrategy.z;
-        this.distance = 0.0D;
         this.color = color;
     }
 

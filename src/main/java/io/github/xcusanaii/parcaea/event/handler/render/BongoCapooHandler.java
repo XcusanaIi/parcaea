@@ -66,39 +66,44 @@ public class BongoCapooHandler {
         GlStateManager.blendFunc(770, 771);
         GlStateManager.pushMatrix();
 
+        int guiScale = mc.gameSettings.guiScale == 0 ? 3 : mc.gameSettings.guiScale;
+        GlStateManager.scale(1.0F / guiScale, 1.0F / guiScale, 1.0F);
+
+        double x = mc.displayWidth * CfgBongoCapoo.xPercent;
+        double y = mc.displayHeight * CfgBongoCapoo.yPercent;
+
+        GlStateManager.translate(x, y, 0.0D);
+
         float scale = (float) CfgBongoCapoo.scale;
         GlStateManager.scale(scale, scale, 1.0F);
 
-        int x = CfgBongoCapoo.x;
-        int y = CfgBongoCapoo.y;
-
         mc.getTextureManager().bindTexture(BACKGROUND);
-        Gui.drawModalRectWithCustomSizedTexture(x, y, 0, 0, W, W, W, W);
+        Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, W, W, W, W);
 
         mc.getTextureManager().bindTexture(KEYBOARD);
-        Gui.drawModalRectWithCustomSizedTexture(x, y, 0, 0, W, W, W, W);
+        Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, W, W, W, W);
 
         for (int i = 0; i < 7; i++) {
             if (InputStat.isKeyDown.keyList[i]) {
                 mc.getTextureManager().bindTexture(KEYBOARDS.get(i));
-                Gui.drawModalRectWithCustomSizedTexture(x, y, 0, 0, W, W, W, W);
+                Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, W, W, W, W);
             }
         }
 
         if (InputStat.lastKeyDownExactLeft != -1) {
             mc.getTextureManager().bindTexture(HANDS.get(InputStat.lastKeyDownExactLeft));
-            Gui.drawModalRectWithCustomSizedTexture(x, y, 0, 0, W, W, W, W);
+            Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, W, W, W, W);
         }else {
             mc.getTextureManager().bindTexture(IDLE);
-            Gui.drawModalRectWithCustomSizedTexture(x + W / 2, y, W / 2.0F, 0, W / 2, W, W, W);
+            Gui.drawModalRectWithCustomSizedTexture(W / 2, 0, W / 2.0F, 0, W / 2, W, W, W);
         }
 
         if (InputStat.lastKeyDownExactRight != -1) {
             mc.getTextureManager().bindTexture(HANDS.get(InputStat.lastKeyDownExactRight));
-            Gui.drawModalRectWithCustomSizedTexture(x, y, 0, 0, W, W, W, W);
+            Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, W, W, W, W);
         }else {
             mc.getTextureManager().bindTexture(IDLE);
-            Gui.drawModalRectWithCustomSizedTexture(x, y, 0, 0, W / 2, W, W, W);
+            Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, W / 2, W, W, W);
         }
 
         GlStateManager.popMatrix();

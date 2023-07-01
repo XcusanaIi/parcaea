@@ -6,7 +6,9 @@ import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
 import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
 import io.github.xcusanaii.parcaea.model.segment.CoordStrategy;
 import io.github.xcusanaii.parcaea.model.segment.Segment;
+import io.github.xcusanaii.parcaea.render.InfoHud;
 import io.github.xcusanaii.parcaea.util.BiConsumerWithArg;
+import io.github.xcusanaii.parcaea.util.math.Vec2d;
 import io.github.xcusanaii.parcaea.util.string.StringUtil;
 import io.github.xcusanaii.parcaea.render.gui.widget.PGuiButton;
 import io.github.xcusanaii.parcaea.render.gui.widget.PGuiTextField;
@@ -64,8 +66,11 @@ public class GuiSegmentMenu extends GuiScreen {
         buttonList.add(btnEnableSegment);
 
         buttonList.add(new PGuiButton(34, x + 387, y + 50, 8, 8, ""));
-
         buttonList.add(new PGuiButton(35, x + 387, y + 62, 8, 8, ""));
+
+        buttonList.add(new PGuiButton(36, x + 295, y + 225, 100, 20, I18n.format("parcaea.render.gui.gui_segment_menu.new_coord_strategy")));
+
+        buttonList.add(new PGuiButton(37, x + 295, y + 250, 100, 20, I18n.format("parcaea.render.gui.gui_segment_menu.remove_coord_strategy")));
 
         for (int i = 0; i < 10; i++) {
             lstItems[i] = new PGuiButton(i, x, y + 25 * (i + 1), 200, 20, I18n.format("txt.key_none"));
@@ -150,6 +155,22 @@ public class GuiSegmentMenu extends GuiScreen {
                 CfgGeneral.segmentViewDistance--;
             }
             txtSegmentViewDistance.setText(String.valueOf(CfgGeneral.segmentViewDistance));
+        }else if (button.id == 36) {
+            if (Segment.selectedSegment != null) {
+                Segment.addCoordStrategy();
+                mc.displayGuiScreen(new GuiEditCoordStrategy());
+            }else {
+                InfoHud.infoDisplayList.add(new InfoHud.InfoDisplay(
+                        new Vec2d(0.5, 0.75),
+                        I18n.format("parcaea.render.gui.gui_segment_menu.select_segment_first"),
+                        ColorGeneral.WARN,
+                        20,
+                        2.0F
+                ));
+            }
+        }else if (button.id == 37) {
+            Segment.removeNearestCoordMarker();
+            mc.displayGuiScreen(null);
         }
     }
 

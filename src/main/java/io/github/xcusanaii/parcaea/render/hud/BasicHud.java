@@ -63,21 +63,6 @@ public class BasicHud extends AbsHud {
     }
 
     @Override
-    public void draw45S() {
-        drawRectWithBorder(jLineCenter, CfgBasic.basicHudWidth / 2, 1, ColorGeneral.ALL_PERFECT, 1, ColorGeneral.ALL_PERFECT_BORDER);
-        drawStyleNoteWithBorder(jLineCenter, mouseNoteSize / 2, mouseNoteSize / 2, ColorGeneral.BLUE, CfgBasic.basicNoteBorderSize, ColorGeneral.BORDER_BLACK);
-        drawStyleNoteWithBorder(new Vec2i(jLineCenter.x - CfgBasic.basicHudWidth / 4, jLineCenter.y), mouseNoteSize / 2, mouseNoteSize / 2, ColorGeneral.YELLOW, CfgBasic.basicNoteBorderSize, ColorGeneral.BORDER_BLACK);
-        drawStyleNoteWithBorder(new Vec2i(jLineCenter.x - CfgBasic.basicHudWidth / 2, jLineCenter.y), mouseNoteSize / 2, mouseNoteSize / 2, ColorGeneral.PINK, CfgBasic.basicNoteBorderSize, ColorGeneral.BORDER_BLACK);
-        drawStyleNoteWithBorder(new Vec2i(jLineCenter.x + CfgBasic.basicHudWidth / 4, jLineCenter.y), mouseNoteSize / 2, mouseNoteSize / 2, ColorGeneral.YELLOW, CfgBasic.basicNoteBorderSize, ColorGeneral.BORDER_BLACK);
-        drawStyleNoteWithBorder(new Vec2i(jLineCenter.x + CfgBasic.basicHudWidth / 2, jLineCenter.y), mouseNoteSize / 2, mouseNoteSize / 2, ColorGeneral.PINK, CfgBasic.basicNoteBorderSize, ColorGeneral.BORDER_BLACK);
-        double mousePosPercent = InputStat.mousePosPercent;
-        if (mousePosPercent < 0) mousePosPercent = 0.0;
-        if (mousePosPercent > 1) mousePosPercent = 1.0;
-        int indicatorX = (int) (leftTop.x + CfgBasic.basicHudWidth * mousePosPercent);
-        drawStyleNoteWithBorder(new Vec2i(indicatorX, jLineCenter.y + indicatorSize / 2), indicatorSize / 2, indicatorSize / 2, ColorGeneral.ORANGE, CfgBasic.basicNoteBorderSize, ColorGeneral.BORDER_BLACK);
-    }
-
-    @Override
     public void drawFrame() {
         String hex = Integer.toHexString((int) Math.round((CfgBasic.basicHudBGOpacity / 100.0) * 255.0));
         int padding = CfgBasic.basicHudBGPadding;
@@ -104,7 +89,7 @@ public class BasicHud extends AbsHud {
                 jLineBorderColor = ColorGeneral.A_MISS_BORDER;
                 break;
         }
-        drawRectWithBorder(jLineCenter, CfgBasic.basicHudWidth / 2, 1, jLineColor, 1, jLineBorderColor);
+        drawRectWithBorder(jLineCenter, CfgBasic.basicHudWidth / 2, 5, jLineColor, 1, jLineBorderColor);
         int keyPressWidth = (int) (CfgBasic.basicHudWidth * CfgBasic.basicKeyNoteSize * 0.2);
         int keyPressHeight = (int) (keyPressWidth / CfgBasic.basicKeyNoteAspectRatio);
         List<Vec2i> pressedTracks = new ArrayList<Vec2i>();
@@ -259,7 +244,6 @@ public class BasicHud extends AbsHud {
     }
 
     private void drawLastUnstableMouseNote(float partialTicks) {
-        if (!CfgGeneral.enableLastInput) return;
         for (UnstableMouseNoteDisplay note : unstableMouseNoteDisplays) {
             double y = note.y + Parcaea.PX_PER_TICK * partialTicks * CfgGeneral.noteSpeed;
             if (y < leftTop.y || y > jLineCenter.y + Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed) continue;

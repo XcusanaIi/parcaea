@@ -14,7 +14,7 @@ public class StringUtil {
                 }
             }
             if (!contained) {
-                return id;
+                return uniqueId;
             }
             uniqueId = id + "_" + suffix;
             suffix++;

@@ -3,6 +3,7 @@ package io.github.xcusanaii.parcaea.event.handler.tick;
 import io.github.xcusanaii.parcaea.Parcaea;
 import io.github.xcusanaii.parcaea.model.KeyBinds;
 import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
+import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
 import io.github.xcusanaii.parcaea.model.input.InputStat;
 import io.github.xcusanaii.parcaea.render.InfoHud;
 import io.github.xcusanaii.parcaea.util.math.Vec2d;
@@ -22,7 +23,7 @@ public class RecordHandler {
         InfoHud.infoDisplayList.add(new InfoHud.InfoDisplay(
                 new Vec2d(0.1, 0.1),
                 String.valueOf(tickI),
-                ColorGeneral.AQUA,
+                CfgGeneral.themeColor,
                 2,
                 2.0f
         ));

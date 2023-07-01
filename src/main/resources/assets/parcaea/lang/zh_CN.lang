@@ -1,7 +1,7 @@
 category.parcaea=帕卡咿呀
 key.test=测试
 key.play_chart=播放
-key.menu=菜单
+key.menu=主菜单
 txt.invert_sprint=反转疾跑
 cfg.basic.offset_x=横偏移
 cfg.basic.offset_y=纵偏移
@@ -33,7 +33,7 @@ txt.hud_style=谱面样式
 txt.enable_sound_effect=音效
 txt.key_none=无
 txt.note_speed=铺面流速
-txt.tolerance_factor=黄键容错
+txt.tolerance_factor=全局容错角
 txt.sensitivity=灵敏度
 txt.left_click=左键
 txt.right_click=右键
@@ -82,3 +82,19 @@ txt.bongo_capoo_y=Y
 txt.bongo_capoo_scale=缩放
 txt.enable_auto_clear_pb=自动PB
 txt.enable_mirror_chart=铺面镜像
+txt.theme_color=主题色
+
+parcaea.render.gui.gui_index.slot_1=按键
+parcaea.render.gui.gui_index.slot_2=跳法
+parcaea.render.gui.gui_index.slot_3=咖波
+parcaea.render.gui.gui_index.slot_4=样式
+parcaea.render.gui.gui_index.slot_5=铺面
+parcaea.render.gui.gui_index.slot_6=配置
+parcaea.render.gui.gui_index.slot_7=坐标
+parcaea.render.gui.gui_index.slot_8=练习
+parcaea.render.gui.gui_index.slot_9=屏障
+
+parcaea.render.gui.gui_segment_menu.new_coord_strategy=新坐标
+parcaea.render.gui.gui_segment_menu.remove_coord_strategy=移除坐标
+parcaea.render.gui.gui_segment_menu.select_segment_first=请先选择一段跳法!
+parcaea.render.gui.gui_segment_menu.no_coord_strategy_found=未找到坐标点!

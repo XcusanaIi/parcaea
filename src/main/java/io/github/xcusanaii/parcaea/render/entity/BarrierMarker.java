@@ -16,6 +16,7 @@ import java.util.List;
 public class BarrierMarker extends Entity {
 
     public static List<BarrierMarker> barrierMarkers = new ArrayList<BarrierMarker>();
+    private static boolean toggleBarrier = false;
 
     private static final Minecraft mc = Minecraft.getMinecraft();
 
@@ -24,6 +25,15 @@ public class BarrierMarker extends Entity {
         this.posX = blockPos.getX() + 0.5D;
         this.posY = blockPos.getY() + 0.5D;
         this.posZ = blockPos.getZ() + 0.5D;
+    }
+
+    public static void toggleBarrier() {
+        toggleBarrier = !toggleBarrier;
+        if (toggleBarrier) {
+            revealBarrier();
+        }else {
+            removeBarrierMarker();
+        }
     }
 
     public static void revealBarrier() {

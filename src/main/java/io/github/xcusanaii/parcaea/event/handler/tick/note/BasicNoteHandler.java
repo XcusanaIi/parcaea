@@ -51,7 +51,7 @@ public class BasicNoteHandler extends NoteHandler {
                     KeyNoteHead keyNote = (KeyNoteHead) keyTicks.get(i).get(j);
                     BasicHud.keyNoteDisplays.add(new BasicHud.KeyNoteDisplay(
                             mapTrackSlot(keyNote.keySlot),
-                            mapKeyNoteColor(keyNote.keySlot, keyNote.isMultiTap),
+                            mapKeyNoteColor(keyNote.keySlot),
                             BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * (i + keyNote.length),
                             BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * i
                     ));
@@ -116,9 +116,8 @@ public class BasicNoteHandler extends NoteHandler {
         }
     }
 
-    public static int mapKeyNoteColor(int keySlot, boolean isMultiTap) {
-        if (isMultiTap) return ColorGeneral.ORANGE;
-        else switch (keySlot) {
+    public static int mapKeyNoteColor(int keySlot) {
+        switch (keySlot) {
             case InputTick.S:
             case InputTick.SNEAK:
                 return ColorGeneral.PINK;
