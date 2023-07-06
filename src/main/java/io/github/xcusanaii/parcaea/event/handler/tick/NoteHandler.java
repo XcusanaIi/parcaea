@@ -8,12 +8,18 @@ import io.github.xcusanaii.parcaea.model.input.UnstableMouseNote;
 import io.github.xcusanaii.parcaea.model.note.KeyNote;
 import io.github.xcusanaii.parcaea.model.note.KeyNoteHead;
 import io.github.xcusanaii.parcaea.model.note.MouseNote;
+import io.github.xcusanaii.parcaea.util.sound.PMusic;
+import io.github.xcusanaii.parcaea.util.sound.SoundUtil;
 import net.minecraft.client.Minecraft;
+
 import java.util.List;
 
 import static io.github.xcusanaii.parcaea.model.input.InputStat.*;
+import static io.github.xcusanaii.parcaea.util.sound.SoundUtil.*;
 
 public abstract class NoteHandler {
+
+    private static PMusic playMusic = null;
 
     public static int tickI = 0;
     public static boolean isPlaying = false;
@@ -34,6 +40,8 @@ public abstract class NoteHandler {
     public void onClientTickPre() {
         if (!CfgGeneral.enableChart) return;
         if (KeyBinds.keyRestartChart.isPressed()) {
+            BeatHandler.tickI = CfgGeneral.beatInterval - 1;
+            stopSound(playMusic);
             if (Chart.selectedChart != null){
                 onRestartChart();
             }
@@ -73,6 +81,8 @@ public abstract class NoteHandler {
         isWaitingInput = false;
         mousePosPercent = Chart.selectedChart.mouseTicks.get(0).posPercent;
         checkInputAtTick(0);
+
+        playMusic = playSound(getSoundName(Chart.selectedChart.id), (float) CfgGeneral.musicVolume);
     }
 
     private void onPlayTick() {
@@ -108,7 +118,7 @@ public abstract class NoteHandler {
         if (CfgGeneral.enableLastInput && !lockLastInput) addLastInput();
         for (int i = 0; i < 7; i++) {
             if (keyTicks.get(tickI).get(i) instanceof KeyNoteHead) {
-                SoundHandler.playSoundEffect(i);
+                SoundUtil.playSoundEffect(i);
             }
             if (i != InputTick.JUMP && i != InputTick.SPRINT) {
                 if (!isMissed && (isKeyDown.keyList[i] ^ (keyTicks.get(tickI).get(i) != null))) {

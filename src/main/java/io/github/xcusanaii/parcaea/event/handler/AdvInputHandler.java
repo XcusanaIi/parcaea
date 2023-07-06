@@ -5,7 +5,7 @@ import io.github.xcusanaii.parcaea.model.KeyBinds;
 import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
 import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
 import io.github.xcusanaii.parcaea.render.InfoHud;
-import io.github.xcusanaii.parcaea.util.KeyMouse;
+import io.github.xcusanaii.parcaea.util.io.KeyMouse;
 import io.github.xcusanaii.parcaea.util.math.Vec2d;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;

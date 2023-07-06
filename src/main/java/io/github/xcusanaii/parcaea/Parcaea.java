@@ -38,7 +38,7 @@ import java.text.DecimalFormat;
 public class Parcaea {
 
     public static final String MODID = "parcaea";
-    public static final String VERSION = "0.0.1";
+    public static final String VERSION = "1.3.5";
     public static final Logger LOGGER = FMLLog.getLogger();
     public static final String FILE_PATH = Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + "/" + MODID;
 
@@ -48,9 +48,10 @@ public class Parcaea {
 
     public static final int CLOSE_SAFE_PADDING = 10;
 
-    public static final DecimalFormat DF_0 = new DecimalFormat("#");
-    public static final DecimalFormat DF_1 = new DecimalFormat("#.#");
-    public static final DecimalFormat DF_2 = new DecimalFormat("#.##");
+    public static final DecimalFormat DF_0 = new DecimalFormat("0");
+    public static final DecimalFormat DF_1 = new DecimalFormat("0.0");
+    public static final DecimalFormat DF_2 = new DecimalFormat("0.00");
+    public static final DecimalFormat DF_5 = new DecimalFormat("0.00000");
 
     public static Configuration config;
 

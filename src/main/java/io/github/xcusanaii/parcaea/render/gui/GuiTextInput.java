@@ -17,7 +17,7 @@ public class GuiTextInput extends GuiScreen {
     private int x;
     private int y;
 
-    private String title;
+    private final String title;
     private PGuiTextField textField;
     private final BiConsumer<String, Boolean> confirm;
 

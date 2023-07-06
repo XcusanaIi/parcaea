@@ -2,7 +2,6 @@ package io.github.xcusanaii.parcaea.render.gui;
 
 import io.github.xcusanaii.parcaea.Parcaea;
 import io.github.xcusanaii.parcaea.model.KeyBinds;
-import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
 import io.github.xcusanaii.parcaea.render.gui.widget.PGuiButton;
 import io.github.xcusanaii.parcaea.render.gui.widget.PGuiSlider;
 import net.minecraft.client.Minecraft;
@@ -19,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static io.github.xcusanaii.parcaea.model.KeyBinds.*;
-import static io.github.xcusanaii.parcaea.util.KeyMouse.getKeyName;
+import static io.github.xcusanaii.parcaea.util.io.KeyMouse.getKeyName;
 
 public class GuiPKControls extends GuiScreen {
 

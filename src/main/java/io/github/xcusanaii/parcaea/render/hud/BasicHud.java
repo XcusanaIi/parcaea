@@ -1,6 +1,7 @@
 package io.github.xcusanaii.parcaea.render.hud;
 
 import io.github.xcusanaii.parcaea.Parcaea;
+import io.github.xcusanaii.parcaea.event.handler.tick.BeatHandler;
 import io.github.xcusanaii.parcaea.event.handler.tick.NoteHandler;
 import io.github.xcusanaii.parcaea.event.TickHandler;
 import io.github.xcusanaii.parcaea.event.handler.tick.note.BasicNoteHandler;
@@ -90,6 +91,12 @@ public class BasicHud extends AbsHud {
                 break;
         }
         drawRectWithBorder(jLineCenter, CfgBasic.basicHudWidth / 2, 5, jLineColor, 1, jLineBorderColor);
+
+        if (BeatHandler.onBeat) {
+            drawRectWithBorder(new Vec2i(jLineCenter.x, (int) (jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * 0.5D)), CfgBasic.basicHudWidth / 2, 5, ColorGeneral.A_MISS, 1, ColorGeneral.A_MISS_BORDER);
+        }
+
+        drawRectWithBorder(new Vec2i(jLineCenter.x, (int) (jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * 0.5D)), CfgBasic.basicHudWidth / 2, 3, jLineColor, 1, jLineBorderColor);
         int keyPressWidth = (int) (CfgBasic.basicHudWidth * CfgBasic.basicKeyNoteSize * 0.2);
         int keyPressHeight = (int) (keyPressWidth / CfgBasic.basicKeyNoteAspectRatio);
         List<Vec2i> pressedTracks = new ArrayList<Vec2i>();

@@ -3,7 +3,7 @@ package io.github.xcusanaii.parcaea.io;
 import io.github.xcusanaii.parcaea.Parcaea;
 import io.github.xcusanaii.parcaea.model.input.InputStat;
 import io.github.xcusanaii.parcaea.model.input.InputTick;
-import io.github.xcusanaii.parcaea.util.FileUtil;
+import io.github.xcusanaii.parcaea.util.io.FileUtil;
 import java.io.*;
 
 public class RecordSaver {

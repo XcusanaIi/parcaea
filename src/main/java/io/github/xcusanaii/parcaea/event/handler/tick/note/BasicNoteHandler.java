@@ -51,9 +51,9 @@ public class BasicNoteHandler extends NoteHandler {
                     KeyNoteHead keyNote = (KeyNoteHead) keyTicks.get(i).get(j);
                     BasicHud.keyNoteDisplays.add(new BasicHud.KeyNoteDisplay(
                             mapTrackSlot(keyNote.keySlot),
-                            mapKeyNoteColor(keyNote.keySlot),
-                            BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * (i + keyNote.length),
-                            BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * i
+                            mapKeyNoteColor(keyNote.keySlot, keyNote.isMultiTap),
+                            BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * (i + keyNote.length + 0.5D),
+                            BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * (i + 0.5D)
                     ));
                 }
             }
@@ -66,7 +66,7 @@ public class BasicNoteHandler extends NoteHandler {
                     BasicHud.lastInputDisplays.add(new BasicHud.LastInputDisplay(
                             mapTrackSlot(j),
                             mapLastInputColor(j),
-                            BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * i
+                            BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * (i + 0.5D)
                     ));
                 }
             }
@@ -84,7 +84,7 @@ public class BasicNoteHandler extends NoteHandler {
                 BasicHud.mouseNoteDisplays.add(new BasicHud.MouseNoteDisplay(
                         mouseNote.posPercent,
                         mouseNote.is45 ? ColorGeneral.BLUE : ColorGeneral.YELLOW,
-                        BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * i
+                        BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * (i + 0.5D)
                 ));
             }
         }
@@ -94,7 +94,7 @@ public class BasicNoteHandler extends NoteHandler {
             if (i < 0 || i >= mouseTicks.size()) continue;
             BasicHud.unstableMouseNoteDisplays.add(new BasicHud.UnstableMouseNoteDisplay(
                     mouseTicks.get(i).posPercent,
-                    BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * lastUnstableMouse.index,
+                    BasicHud.jLineCenter.y - Parcaea.PX_PER_TICK * CfgGeneral.noteSpeed * (lastUnstableMouse.index + 0.5D),
                     lastUnstableMouse.type
             ));
         }
@@ -116,8 +116,10 @@ public class BasicNoteHandler extends NoteHandler {
         }
     }
 
-    public static int mapKeyNoteColor(int keySlot) {
-        switch (keySlot) {
+    public static int mapKeyNoteColor(int keySlot, boolean isMultiTap) {
+        if (CfgGeneral.enableDoubleTapHint && isMultiTap) {
+            return ColorGeneral.ORANGE;
+        } else switch (keySlot) {
             case InputTick.S:
             case InputTick.SNEAK:
                 return ColorGeneral.PINK;

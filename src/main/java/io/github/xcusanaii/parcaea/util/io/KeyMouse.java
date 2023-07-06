@@ -1,4 +1,4 @@
-package io.github.xcusanaii.parcaea.util;
+package io.github.xcusanaii.parcaea.util.io;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;

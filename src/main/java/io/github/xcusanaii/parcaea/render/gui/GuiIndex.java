@@ -7,7 +7,7 @@ import io.github.xcusanaii.parcaea.model.segment.Segment;
 import io.github.xcusanaii.parcaea.render.InfoHud;
 import io.github.xcusanaii.parcaea.render.entity.BarrierMarker;
 import io.github.xcusanaii.parcaea.render.gui.widget.PGuiButton;
-import io.github.xcusanaii.parcaea.util.KeyMouse;
+import io.github.xcusanaii.parcaea.util.io.KeyMouse;
 import io.github.xcusanaii.parcaea.util.math.Vec2d;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

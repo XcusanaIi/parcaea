@@ -18,7 +18,7 @@ public class InfoHud extends GuiIngame {
 
     public InfoHud(Minecraft mcIn) {
         super(mcIn);
-//        infoDisplayList.add(debugInfo);
+        infoDisplayList.add(debugInfo);
     }
 
     public void draw() {

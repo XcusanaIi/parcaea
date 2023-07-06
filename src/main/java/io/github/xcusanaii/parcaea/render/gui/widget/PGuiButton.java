@@ -3,6 +3,7 @@ package io.github.xcusanaii.parcaea.render.gui.widget;
 import io.github.xcusanaii.parcaea.Parcaea;
 import io.github.xcusanaii.parcaea.model.color.ColorGeneral;
 import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
+import io.github.xcusanaii.parcaea.util.sound.SoundUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
@@ -79,9 +80,6 @@ public class PGuiButton extends GuiButton {
 
     @Override
     public void playPressSound(SoundHandler soundHandlerIn) {
-        EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
-        if (player != null && player.worldObj != null) {
-            player.playSound("parcaea:btn", 1.0f, 1.0f);
-        }
+        SoundUtil.playSound(SoundUtil.getSoundName("btn"), (float) CfgGeneral.soundEffectVolume);
     }
 }

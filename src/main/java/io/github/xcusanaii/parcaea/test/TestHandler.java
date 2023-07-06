@@ -15,7 +15,7 @@ public class TestHandler {
     public void onTickEvent(ClientTickEvent event) {
         if (event.phase == TickEvent.Phase.END || mc.thePlayer == null) return;
         if (KeyBinds.keyTest.isPressed()){
-            Parcaea.LOGGER.info("Key Pressed");
+            Parcaea.LOGGER.info("Test Key Pressed");
         }
     }
 }

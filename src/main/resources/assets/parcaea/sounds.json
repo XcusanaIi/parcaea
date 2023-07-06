@@ -6,5 +6,7 @@
   "s5": {"sounds": [{"name": "s5", "stream": true}]},
   "s6": {"sounds": [{"name": "s6", "stream": true}]},
   "s7": {"sounds": [{"name": "s7", "stream": true}]},
-  "btn": {"sounds": [{"name": "btn", "stream": true}]}
+  "btn": {"sounds": [{"name": "btn", "stream": true}]},
+  "beat": {"sounds": [{"name": "beat", "stream": true}]},
+  "cthugha": {"sounds": [{"name": "cthugha", "stream": true}]}
 }

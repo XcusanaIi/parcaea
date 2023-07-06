@@ -14,6 +14,8 @@ import net.minecraft.client.resources.I18n;
 
 import java.io.IOException;
 
+import static io.github.xcusanaii.parcaea.Parcaea.DF_5;
+
 public class GuiEditCoordStrategy extends GuiScreen {
 
     private PGuiTextField txtX, txtZ, txtF, txtStrategy;
@@ -78,10 +80,13 @@ public class GuiEditCoordStrategy extends GuiScreen {
     @Override
     protected void actionPerformed(GuiButton button) {
         if (button.id == 0) {
-            if (StringUtil.isDouble(txtX.getText()) && StringUtil.isDouble(txtZ.getText()) && StringUtil.isDouble(txtF.getText())) {
-                double x = Double.parseDouble(txtX.getText());
-                double z = Double.parseDouble(txtZ.getText());
-                double f = RotationUtil.mapDisplayYaw(Double.parseDouble(txtF.getText()));
+            String textX = txtX.getText();
+            String textZ = txtZ.getText();
+            String textF = txtF.getText();
+            if (StringUtil.isDouble(textX) && StringUtil.isDouble(textZ) && StringUtil.isDouble(textF)) {
+                double x = Double.parseDouble(textX);
+                double z = Double.parseDouble(textZ);
+                double f = Double.parseDouble(DF_5.format(RotationUtil.mapDisplayYaw(Double.parseDouble(textF))));
                 CoordMarker coordMarker = Segment.findNearestCoordMarker();
                 if (coordMarker != null) {
                     coordMarker.coordStrategy.x = x;
@@ -93,22 +98,25 @@ public class GuiEditCoordStrategy extends GuiScreen {
                 mc.displayGuiScreen(null);
             }
         } else if (button.id >= 1 && button.id <= 12) {
-            if (StringUtil.isDouble(txtX.getText())) {
-                double x = Double.parseDouble(txtX.getText());
+            String text = txtX.getText();
+            if (StringUtil.isDouble(text)) {
+                double x = Double.parseDouble(text);
                 x += (Double) ((PGuiButton) button).data;
-                txtX.setText(String.valueOf(x));
+                txtX.setText(DF_5.format(x));
             }
         } else if (button.id >= 13 && button.id <= 24) {
-            if (StringUtil.isDouble(txtZ.getText())) {
-                double z = Double.parseDouble(txtZ.getText());
+            String text = txtZ.getText();
+            if (StringUtil.isDouble(text)) {
+                double z = Double.parseDouble(text);
                 z += (Double) ((PGuiButton) button).data;
-                txtZ.setText(String.valueOf(z));
+                txtZ.setText(DF_5.format(z));
             }
         } else if (button.id >= 25 && button.id <= 36) {
-            if (StringUtil.isDouble(txtF.getText())) {
-                double f = Double.parseDouble(txtF.getText());
+            String text = txtF.getText();
+            if (StringUtil.isDouble(text)) {
+                double f = Double.parseDouble(text);
                 f += (Double) ((PGuiButton) button).data;
-                txtF.setText(String.valueOf(f));
+                txtF.setText(DF_5.format(f));
             }
         }
     }

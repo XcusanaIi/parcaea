@@ -12,16 +12,21 @@ public class ConfigLoader {
         CfgGeneral.enableChart = config.get("general", "enableChart", true).getBoolean();
         CfgGeneral.enableSnake = config.get("general", "enableSnake", true).getBoolean();
         CfgGeneral.noteSpeed = config.get("general", "noteSpeed", 1.0).getDouble();
-        CfgGeneral.enableAutoPos = config.get("general", "enableAutoPos", false).getBoolean();
+        CfgGeneral.enableAutoPos = config.get("general", "enableAutoPos", true).getBoolean();
         CfgGeneral.toleranceFactor = config.get("general", "toleranceFactor", 0.1).getDouble();
         CfgGeneral.enableLastInput = config.get("general", "enableLastInput", true).getBoolean();
         CfgGeneral.hudOffsetX = config.get("general", "hudOffsetX", 0).getInt();
         CfgGeneral.hudOffsetY = config.get("general", "hudOffsetY", 0).getInt();
         CfgGeneral.enableSoundEffect = config.get("general", "enableSoundEffect", true).getBoolean();
-        CfgGeneral.enableSegment = config.get("general", "enableSegment", false).getBoolean();
+        CfgGeneral.enableSegment = config.get("general", "enableSegment", true).getBoolean();
         CfgGeneral.segmentViewDistance = config.get("general", "segmentViewDistance", 16).getInt();
         CfgGeneral.barrierDistance = config.get("general", "barrierDistance", 16).getInt();
         CfgGeneral.themeColor = config.get("general", "themeColor", ColorGeneral.AQUA).getInt();
+        CfgGeneral.enableBeat = config.get("general", "enableBeat", true).getBoolean();
+        CfgGeneral.beatInterval = config.get("general", "beatInterval", 8).getInt();
+        CfgGeneral.enableDoubleTapHint = config.get("general", "enableDoubleTapHint", true).getBoolean();
+        CfgGeneral.soundEffectVolume = config.get("general", "soundEffectVolume", 1.0).getDouble();
+        CfgGeneral.musicVolume = config.get("general", "musicVolume", 0.5).getDouble();
 
         CfgBasic.basicHudWidth = config.get("hud.basic", "basicHudWidth", 400).getInt();
         CfgBasic.basicHudHeight = config.get("hud.basic", "basicHudHeight", 300).getInt();
@@ -49,16 +54,21 @@ public class ConfigLoader {
         config.get("general", "enableChart", true).set(CfgGeneral.enableChart);
         config.get("general", "enableSnake", true).set(CfgGeneral.enableSnake);
         config.get("general", "noteSpeed", 1.0).set(CfgGeneral.noteSpeed);
-        config.get("general", "enableAutoPos", false).set(CfgGeneral.enableAutoPos);
+        config.get("general", "enableAutoPos", true).set(CfgGeneral.enableAutoPos);
         config.get("general", "toleranceFactor", 0.1).set(CfgGeneral.toleranceFactor);
         config.get("general", "enableLastInput", true).set(CfgGeneral.enableLastInput);
         config.get("general", "hudOffsetX", 0).set(CfgGeneral.hudOffsetX);
         config.get("general", "hudOffsetY", 0).set(CfgGeneral.hudOffsetY);
         config.get("general", "enableSoundEffect", true).set(CfgGeneral.enableSoundEffect);
-        config.get("general", "enableSegment", false).set(CfgGeneral.enableSegment);
+        config.get("general", "enableSegment", true).set(CfgGeneral.enableSegment);
         config.get("general", "segmentViewDistance", 16).set(CfgGeneral.segmentViewDistance);
         config.get("general", "barrierDistance", 16).set(CfgGeneral.barrierDistance);
         config.get("general", "themeColor", ColorGeneral.AQUA).set(CfgGeneral.themeColor);
+        config.get("general", "enableBeat", true).set(CfgGeneral.enableBeat);
+        config.get("general", "beatInterval", 8).set(CfgGeneral.beatInterval);
+        config.get("general", "enableDoubleTapHint", true).set(CfgGeneral.enableDoubleTapHint);
+        config.get("general", "soundEffectVolume", 1.0).set(CfgGeneral.soundEffectVolume);
+        config.get("general", "musicVolume", 0.5).set(CfgGeneral.musicVolume);
 
         config.get("hud.basic", "basicHudWidth", 400).set(CfgBasic.basicHudWidth);
         config.get("hud.basic", "basicHudHeight", 300).set(CfgBasic.basicHudHeight);

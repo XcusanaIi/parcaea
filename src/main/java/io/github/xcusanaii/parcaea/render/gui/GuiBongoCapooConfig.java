@@ -17,10 +17,6 @@ public class GuiBongoCapooConfig extends GuiScreen {
 
     private PGuiButton btnEnableBongoCapoo;
 
-    private PGuiSlider sldX;
-    private PGuiSlider sldY;
-    private PGuiSlider sldScale;
-
     private final int screenWidth = 300;
     private final int screenHeight = 95;
     public int x;
@@ -35,48 +31,66 @@ public class GuiBongoCapooConfig extends GuiScreen {
         btnEnableBongoCapoo.packedFGColour = CfgBongoCapoo.enableBongoCapoo ? ColorGeneral.BTN_ENABLE : ColorGeneral.BTN_DISABLE;
         buttonList.add(btnEnableBongoCapoo);
 
-        sldX = new PGuiSlider(new GuiPageButtonList.GuiResponder() {
+        PGuiSlider sldX = new PGuiSlider(new GuiPageButtonList.GuiResponder() {
             @Override
-            public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {}
+            public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {
+            }
+
             @Override
             public void onTick(int id, float value) {
                 CfgBongoCapoo.xPercent = value;
             }
+
             @Override
-            public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
+            public void func_175319_a(int p_175319_1_, String p_175319_2_) {
+            }
         }, 100, x, y + 25, "txt.bongo_capoo_x", 0.0F, 1.0F, (float) CfgBongoCapoo.xPercent, new GuiSlider.FormatHelper() {
             @Override
-            public String getText(int id, String name, float value) {return name + ": " + Parcaea.DF_2.format(value);}
+            public String getText(int id, String name, float value) {
+                return name + ": " + Parcaea.DF_2.format(value);
+            }
         }, 300);
         buttonList.add(sldX);
 
-        sldY = new PGuiSlider(new GuiPageButtonList.GuiResponder() {
+        PGuiSlider sldY = new PGuiSlider(new GuiPageButtonList.GuiResponder() {
             @Override
-            public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {}
+            public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {
+            }
+
             @Override
             public void onTick(int id, float value) {
                 CfgBongoCapoo.yPercent = value;
             }
+
             @Override
-            public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
+            public void func_175319_a(int p_175319_1_, String p_175319_2_) {
+            }
         }, 100, x, y + 50, "txt.bongo_capoo_y", 0.0F, 1.0F, (float) CfgBongoCapoo.yPercent, new GuiSlider.FormatHelper() {
             @Override
-            public String getText(int id, String name, float value) {return name + ": " + Parcaea.DF_2.format(value);}
+            public String getText(int id, String name, float value) {
+                return name + ": " + Parcaea.DF_2.format(value);
+            }
         }, 300);
         buttonList.add(sldY);
 
-        sldScale = new PGuiSlider(new GuiPageButtonList.GuiResponder() {
+        PGuiSlider sldScale = new PGuiSlider(new GuiPageButtonList.GuiResponder() {
             @Override
-            public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {}
+            public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {
+            }
+
             @Override
             public void onTick(int id, float value) {
                 CfgBongoCapoo.scale = value;
             }
+
             @Override
-            public void func_175319_a(int p_175319_1_, String p_175319_2_) {}
+            public void func_175319_a(int p_175319_1_, String p_175319_2_) {
+            }
         }, 100, x, y + 75, "txt.bongo_capoo_scale", 0.1F, 10.0F, (float) CfgBongoCapoo.scale, new GuiSlider.FormatHelper() {
             @Override
-            public String getText(int id, String name, float value) {return name + ": " + Parcaea.DF_2.format(value);}
+            public String getText(int id, String name, float value) {
+                return name + ": " + Parcaea.DF_2.format(value);
+            }
         }, 300);
         buttonList.add(sldScale);
     }

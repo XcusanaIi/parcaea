@@ -3,7 +3,7 @@ package io.github.xcusanaii.parcaea.io;
 import io.github.xcusanaii.parcaea.Parcaea;
 import io.github.xcusanaii.parcaea.model.segment.CoordStrategy;
 import io.github.xcusanaii.parcaea.model.segment.Segment;
-import io.github.xcusanaii.parcaea.util.FileUtil;
+import io.github.xcusanaii.parcaea.util.io.FileUtil;
 import io.github.xcusanaii.parcaea.util.string.StringUtil;
 
 import java.io.*;

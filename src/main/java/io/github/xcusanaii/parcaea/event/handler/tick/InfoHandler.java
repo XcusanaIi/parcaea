@@ -1,5 +1,6 @@
 package io.github.xcusanaii.parcaea.event.handler.tick;
 
+import io.github.xcusanaii.parcaea.model.config.CfgGeneral;
 import io.github.xcusanaii.parcaea.render.InfoHud;
 import io.github.xcusanaii.parcaea.render.InfoHud.InfoDisplay;
 import java.util.function.Predicate;
@@ -18,5 +19,7 @@ public class InfoHandler {
                 return infoDisplay.life == 0;
             }
         });
+
+        InfoHud.debugInfo.info = "";
     }
 }

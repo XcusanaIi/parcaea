@@ -9,7 +9,7 @@ import io.github.xcusanaii.parcaea.render.AbsHud;
 import io.github.xcusanaii.parcaea.render.gui.hudmenu.AGuiHudMenu;
 import io.github.xcusanaii.parcaea.render.hud.BasicHud;
 import io.github.xcusanaii.parcaea.render.InfoHud;
-import io.github.xcusanaii.parcaea.util.KeyMouse;
+import io.github.xcusanaii.parcaea.util.io.KeyMouse;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -33,7 +33,6 @@ public class RenderHandler {
         if (CfgGeneral.enableChart && (mc.currentScreen == null || mc.currentScreen instanceof AGuiHudMenu)) hud.draw(event.partialTicks);
         INFO_HUD.draw();
         BongoCapooHandler.onRenderGameOverlayEventPost(event.partialTicks);
-        InfoHud.debugInfo.info = String.valueOf(InputStat.mousePosPercentPre);
     }
 
     public static void setHud(AbsHud hud) {

@@ -9,8 +9,7 @@ import io.github.xcusanaii.parcaea.model.input.InputStat;
 import io.github.xcusanaii.parcaea.model.segment.Segment;
 import io.github.xcusanaii.parcaea.render.entity.CoordMarker;
 import io.github.xcusanaii.parcaea.render.gui.GuiIndex;
-import io.github.xcusanaii.parcaea.render.gui.GuiEditCoordStrategy;
-import io.github.xcusanaii.parcaea.util.KeyMouse;
+import io.github.xcusanaii.parcaea.util.io.KeyMouse;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -28,6 +27,7 @@ public class TickHandler {
     public static RecordHandler recordHandler = new RecordHandler();
     public static AutoCoordHandler autoCoordHandler = new AutoCoordHandler();
     public static LandingBlockHandler landingBlockHandler = new LandingBlockHandler();
+    public static BeatHandler beatHandler = new BeatHandler();
 
     public static boolean advInputKeyBindJumpPressed = false;
     public static boolean advInputKeyBindForwardPressed = false;
@@ -76,7 +76,7 @@ public class TickHandler {
                     ClientCommandHandler.instance.executeCommand(mc.thePlayer, "/mpk clearpb");
                 }
             }
-            if (KeyBinds.keyAcscCoordStrategy.isPressed()) {
+            if (KeyBinds.keyAutoCoord.isPressed()) {
                 CoordMarker nearestCoordMarker = Segment.findNearestCoordMarker();
                 if (nearestCoordMarker != null) {
                     AutoCoordHandler.coordStrategy = nearestCoordMarker.coordStrategy;
@@ -84,6 +84,8 @@ public class TickHandler {
                 }
             }
             autoCoordHandler.onClientTickPre();
+
+            beatHandler.onClientTickPre();
 
 //            InfoHud.infoDisplayList.add(new InfoHud.InfoDisplay(
 //                    new Vec2d(0.1D, 0.1D),
